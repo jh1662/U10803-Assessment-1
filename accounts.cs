@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿public class Customer {
+    public string name;
+    public string email;
+    public 
+}
 
-namespace U10803___Assessment_1 {
-    internal class accounts {
-    }
+public class Purchase {
+    public DateTime saleDate;
+    public decimal price;
+    public Dictionary<string, Item> items = new Dictionary<string, Item>();
 }

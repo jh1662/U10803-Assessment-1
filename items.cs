@@ -10,7 +10,6 @@ public class StockSystem {
         return true;
     }
     public bool sell(string name, int qty) {
-        bool checkStock;
 
         if (!items.ContainsKey(name)) { return false; }
         if (!items[name].sell(qty)) { return false; }
@@ -23,10 +22,14 @@ public class StockSystem {
     }
 }
 
+//------------------------------------------------------------------------------------------------------------------------------
+//# classes that doesn't call non-system objects
+
 public class Item {
     public string name;
     public decimal price;
-    public int stock; // USING "{get; set;}" DEFEATS THE PURPOSE OF USING PRIVATE ACCESS MODIFIER! (hence why I used public instead)
+    public int stock; 
+    //^ USING "{get; set;}" DEFEATS THE PURPOSE OF USING PRIVATE ACCESS MODIFIER! (hence why I used public instead)
     // public int orderStockLevel;
     public Item(string name, decimal price, int stock) {
         this.name = name;

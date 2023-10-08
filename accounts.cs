@@ -16,8 +16,8 @@
 public class Purchase {
     public DateTime saleDate;
     public decimal price;
-    public Dictionary<string, int> stockList = new Dictionary<string, int>();
-    public Purchase(DateTime saleDate, decimal price, Dictionary items) { 
+    public Dictionary<string, int> items = new Dictionary<string, int>();
+    public Purchase(DateTime saleDate, decimal price, Dictionary<string, int> items) { 
         this.saleDate = saleDate;
         this.price = price;
         this.items = items;

@@ -68,19 +68,36 @@ public class Clothing : Item {
     }
 }
 public class Accessory : Item {
-    public Accessory(string name, decimal price, int stock) : base(name, price, stock) {
+    string accessoryType;
+    public Accessory(string name, decimal price, int stock, string accessoryType) : base(name, price, stock) {
+        this.accessoryType = accessoryType;
     }
 }
-/*
+//------------------------------------------------------------------------------------------------------------------------------
+#region children of the 'Accessory' class
 public class Bag : Accessory {
     public decimal capacity;
+    public Bag(string name, decimal price, int stock, string accessoryType, decimal capacity) 
+    : base(name, price, stock, accessoryType) {
+        this.capacity = capacity;
+    }
 }
 public class Watch : Accessory {
     public bool hasGPS;
     public bool hasRate;
+    public Watch(string name, decimal price, int stock, string accessoryType, bool hasGPS, bool hasRate)
+    : base(name, price, stock, accessoryType) {
+        this.hasGPS = hasGPS;
+        this.hasRate = hasRate;
+    }
 }
 public class Drink : Accessory {
     public decimal capacity;
     public string type;
+    public Drink(string name, decimal price, int stock, string accessoryType, decimal capacity, string type)
+    : base(name, price, stock, accessoryType) {
+        this.capacity = capacity;
+        this.type = type;
+    }
 }
-*/
+#endregion

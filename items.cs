@@ -15,9 +15,14 @@ public class StockSystem {
         if (!items[name].sell(qty)) { return false; }
         return true;
     }
-    public bool add(string name, int qty) {
+    public bool stock(string name, int qty) {
         if (!items.ContainsKey(name)) { return false; }
         items[name].add(qty);
+        return true;
+    }
+    public bool add(Item item) {
+        if (items.ContainsKey(item.name)) { return false; }
+        items[item.name] = item;
         return true;
     }
 }
@@ -69,24 +74,24 @@ public class Clothing : Item {
 }
 public class Accessory : Item {
     string accessoryType;
-    public Accessory(string name, decimal price, int stock, string accessoryType) : base(name, price, stock) {
-        this.accessoryType = accessoryType;
+    public Accessory(string name, decimal price, int stock) : base(name, price, stock) {
+        this.accessoryType = "heuristic text";
     }
 }
 //------------------------------------------------------------------------------------------------------------------------------
 #region children of the 'Accessory' class
 public class Bag : Accessory {
     public decimal capacity;
-    public Bag(string name, decimal price, int stock, string accessoryType, decimal capacity) 
-    : base(name, price, stock, accessoryType) {
+    public Bag(string name, decimal price, int stock, decimal capacity) 
+    : base(name, price, stock) {
         this.capacity = capacity;
     }
 }
 public class Watch : Accessory {
     public bool hasGPS;
     public bool hasRate;
-    public Watch(string name, decimal price, int stock, string accessoryType, bool hasGPS, bool hasRate)
-    : base(name, price, stock, accessoryType) {
+    public Watch(string name, decimal price, int stock, bool hasGPS, bool hasRate)
+    : base(name, price, stock) {
         this.hasGPS = hasGPS;
         this.hasRate = hasRate;
     }
@@ -94,8 +99,8 @@ public class Watch : Accessory {
 public class Drink : Accessory {
     public decimal capacity;
     public string type;
-    public Drink(string name, decimal price, int stock, string accessoryType, decimal capacity, string type)
-    : base(name, price, stock, accessoryType) {
+    public Drink(string name, decimal price, int stock, decimal capacity, string type)
+    : base(name, price, stock) {
         this.capacity = capacity;
         this.type = type;
     }

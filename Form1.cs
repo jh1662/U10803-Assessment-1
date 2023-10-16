@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace U10803___Assessment_1 {
     public partial class Form1 : Form {
         //: instansiatating own
@@ -69,6 +71,33 @@ namespace U10803___Assessment_1 {
             }
             itemArr = itemList.ToArray();
 
+            tableStorageItems.RowCount = 1;
+            List<Label> labelsBuffer = new List<Label>();
+            int labelsBufferPointer = 0;
+            for (int i = 0; i < itemArr.Length; i++) {
+                tableStorageItems.RowCount++;
+
+                labelsBuffer.Add(new Label());
+                labelsBuffer[labelsBufferPointer].Text = itemArr[i].name.ToString();
+                tableStorageItems.Controls.Add(labelsBuffer[labelsBufferPointer], 0, i + 1);
+                Debug.WriteLine(labelsBuffer[labelsBufferPointer].Text);
+                labelsBufferPointer++;
+
+                labelsBuffer.Add(new Label());
+                labelsBuffer[labelsBufferPointer].Text = itemArr[i].price.ToString();
+                tableStorageItems.Controls.Add(labelsBuffer[labelsBufferPointer], 1, i + 1);
+                labelsBufferPointer++;
+
+                labelsBuffer.Add(new Label());
+                labelsBuffer[labelsBufferPointer].Text = itemArr[i].stock.ToString();
+                tableStorageItems.Controls.Add(labelsBuffer[labelsBufferPointer], 2, i + 1);
+                labelsBufferPointer++;
+
+                labelsBuffer.Add(new Label());
+                labelsBuffer[labelsBufferPointer].Text = itemArr[i].giveUniqueDetails();
+                tableStorageItems.Controls.Add(labelsBuffer[labelsBufferPointer], 3, i + 1);
+                labelsBufferPointer++;
+            }
         }
         #endregion
 
@@ -96,10 +125,12 @@ namespace U10803___Assessment_1 {
             return verified;
         }
         private void buttonAddSubmit_Click(object sender, EventArgs e) {
-            string[] saperatedInputs = verifyDetailsInput(labelAddDetails.Text, numberOfDetails);
+            string[] saperatedInputs = verifyDetailsInput(textboxAddDetails.Text, numberOfDetails);
             string name;
             int stock;
             decimal price;
+
+            if (comboboxAddType.SelectedIndex == null) { MessageBox.Show("You didn't select anything in all availible comboboxes", "ERROR"); }
 
             //: critical verification
             if (saperatedInputs.Length == 0) {
@@ -115,25 +146,22 @@ namespace U10803___Assessment_1 {
                 case 0:
                     groupVerification.Add(decimal.TryParse(saperatedInputs[3], out decimal shoeSize));
                     string shoeType = saperatedInputs[4];
+                    if (groupVerification.Contains(false)) { MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR"); }
                     Shoe shoeObj = new Shoe(name, price, stock, shoeSize, shoeType);
-                    if (!stockSystem.add(shoeObj)) {
-                        MessageBox.Show("Item (by name) aleady exists", "ERROR");
-                    }
+                    if (!stockSystem.add(shoeObj)) { MessageBox.Show("Item (by name) aleady exists", "ERROR"); }
                     break;
                 case 1:
                     groupVerification.Add(int.TryParse(saperatedInputs[3], out int clothingSize));
                     string clothingType = saperatedInputs[4];
                     string style = saperatedInputs[5];
+                    if (groupVerification.Contains(false)) { MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR"); }
                     Clothing clothingObj = new Clothing(name, price, stock, clothingSize, clothingType, style);
-                    if (!stockSystem.add(clothingObj)) {
-                        MessageBox.Show("Item (by name) aleady exists", "ERROR");
-                    }
+                    if (!stockSystem.add(clothingObj)) { MessageBox.Show("Item (by name) aleady exists", "ERROR"); }
                     break;
                 default:
                     Accessory accessoryObj = new Accessory(name, price, stock);
-                    if (!stockSystem.add(accessoryObj)) {
-                        MessageBox.Show("Item (by name) aleady exists", "ERROR");
-                    }
+                    if (groupVerification.Contains(false)) { MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR"); }
+                    if (!stockSystem.add(accessoryObj)) { MessageBox.Show("Item (by name) aleady exists", "ERROR"); }
                     break;
             }
         }

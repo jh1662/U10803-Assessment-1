@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             tabControl = new TabControl();
             introTab = new TabPage();
+            richTextBox1 = new RichTextBox();
             tabCheckout = new TabPage();
             tabCustomers = new TabPage();
             tabSuppliers = new TabPage();
@@ -57,6 +58,7 @@
             comboBox1 = new ComboBox();
             tabPage1 = new TabPage();
             tabControl.SuspendLayout();
+            introTab.SuspendLayout();
             Storage.SuspendLayout();
             tableStorageItems.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -77,47 +79,63 @@
             tabControl.Controls.Add(tabAdd);
             tabControl.Dock = DockStyle.Fill;
             tabControl.Location = new Point(0, 0);
+            tabControl.Margin = new Padding(3, 2, 3, 2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(800, 451);
+            tabControl.Size = new Size(700, 338);
             tabControl.TabIndex = 0;
             // 
             // introTab
             // 
-            introTab.Location = new Point(4, 29);
+            introTab.Controls.Add(richTextBox1);
+            introTab.Location = new Point(4, 24);
+            introTab.Margin = new Padding(3, 2, 3, 2);
             introTab.Name = "introTab";
-            introTab.Padding = new Padding(3);
-            introTab.Size = new Size(792, 418);
+            introTab.Padding = new Padding(3, 2, 3, 2);
+            introTab.Size = new Size(692, 310);
             introTab.TabIndex = 0;
             introTab.Text = "Introduction";
             introTab.UseVisualStyleBackColor = true;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.Dock = DockStyle.Fill;
+            richTextBox1.Enabled = false;
+            richTextBox1.Location = new Point(3, 2);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(686, 306);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
+            // 
             // tabCheckout
             // 
-            tabCheckout.Location = new Point(4, 29);
+            tabCheckout.Location = new Point(4, 24);
+            tabCheckout.Margin = new Padding(3, 2, 3, 2);
             tabCheckout.Name = "tabCheckout";
-            tabCheckout.Padding = new Padding(3);
-            tabCheckout.Size = new Size(792, 418);
+            tabCheckout.Padding = new Padding(3, 2, 3, 2);
+            tabCheckout.Size = new Size(692, 310);
             tabCheckout.TabIndex = 1;
             tabCheckout.Text = "Checkout";
             tabCheckout.UseVisualStyleBackColor = true;
             // 
             // tabCustomers
             // 
-            tabCustomers.Location = new Point(4, 29);
+            tabCustomers.Location = new Point(4, 24);
+            tabCustomers.Margin = new Padding(3, 2, 3, 2);
             tabCustomers.Name = "tabCustomers";
-            tabCustomers.Padding = new Padding(3);
-            tabCustomers.Size = new Size(792, 418);
+            tabCustomers.Padding = new Padding(3, 2, 3, 2);
+            tabCustomers.Size = new Size(692, 310);
             tabCustomers.TabIndex = 2;
             tabCustomers.Text = "Customers";
             tabCustomers.UseVisualStyleBackColor = true;
             // 
             // tabSuppliers
             // 
-            tabSuppliers.Location = new Point(4, 29);
+            tabSuppliers.Location = new Point(4, 24);
+            tabSuppliers.Margin = new Padding(3, 2, 3, 2);
             tabSuppliers.Name = "tabSuppliers";
-            tabSuppliers.Padding = new Padding(3);
-            tabSuppliers.Size = new Size(792, 418);
+            tabSuppliers.Padding = new Padding(3, 2, 3, 2);
+            tabSuppliers.Size = new Size(692, 310);
             tabSuppliers.TabIndex = 3;
             tabSuppliers.Text = "Suppliers";
             tabSuppliers.UseVisualStyleBackColor = true;
@@ -126,10 +144,11 @@
             // 
             Storage.Controls.Add(tableStorageItems);
             Storage.Controls.Add(tableLayoutPanel1);
-            Storage.Location = new Point(4, 29);
+            Storage.Location = new Point(4, 24);
+            Storage.Margin = new Padding(3, 2, 3, 2);
             Storage.Name = "Storage";
-            Storage.Padding = new Padding(3);
-            Storage.Size = new Size(792, 418);
+            Storage.Padding = new Padding(3, 2, 3, 2);
+            Storage.Size = new Size(692, 310);
             Storage.TabIndex = 4;
             Storage.Text = "Storage";
             Storage.UseVisualStyleBackColor = true;
@@ -139,47 +158,46 @@
             tableStorageItems.ColumnCount = 4;
             tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 59.91379F));
             tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40.08621F));
-            tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 122F));
-            tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 390F));
-            tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 387F));
+            tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 107F));
+            tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 342F));
+            tableStorageItems.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 339F));
             tableStorageItems.Controls.Add(label5, 3, 0);
             tableStorageItems.Controls.Add(label6, 2, 0);
             tableStorageItems.Controls.Add(label7, 1, 0);
             tableStorageItems.Controls.Add(label8, 0, 0);
             tableStorageItems.Dock = DockStyle.Bottom;
-            tableStorageItems.Location = new Point(3, 167);
-            tableStorageItems.Margin = new Padding(3, 4, 3, 4);
+            tableStorageItems.Location = new Point(3, 122);
             tableStorageItems.Name = "tableStorageItems";
             tableStorageItems.RowCount = 2;
             tableStorageItems.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableStorageItems.RowStyles.Add(new RowStyle(SizeType.Absolute, 220F));
-            tableStorageItems.Size = new Size(786, 248);
+            tableStorageItems.RowStyles.Add(new RowStyle(SizeType.Absolute, 165F));
+            tableStorageItems.Size = new Size(686, 186);
             tableStorageItems.TabIndex = 4;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(398, 0);
+            label5.Location = new Point(346, 0);
             label5.Name = "label5";
-            label5.Size = new Size(139, 20);
+            label5.Size = new Size(111, 15);
             label5.TabIndex = 0;
             label5.Text = "[unique properties]:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(276, 0);
+            label6.Location = new Point(239, 0);
             label6.Name = "label6";
-            label6.Size = new Size(48, 20);
+            label6.Size = new Size(39, 15);
             label6.TabIndex = 1;
             label6.Text = "Stock:";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(167, 0);
+            label7.Location = new Point(144, 0);
             label7.Name = "label7";
-            label7.Size = new Size(44, 20);
+            label7.Size = new Size(36, 15);
             label7.TabIndex = 2;
             label7.Text = "Price:";
             // 
@@ -188,7 +206,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(3, 0);
             label8.Name = "label8";
-            label8.Size = new Size(52, 20);
+            label8.Size = new Size(42, 15);
             label8.TabIndex = 3;
             label8.Text = "Name:";
             // 
@@ -204,13 +222,14 @@
             tableLayoutPanel1.Controls.Add(comboboxStorageSort, 1, 1);
             tableLayoutPanel1.Controls.Add(comboboxStorageExtrafilter, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(3, 3);
+            tableLayoutPanel1.Location = new Point(3, 2);
+            tableLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 57.1428566F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
-            tableLayoutPanel1.Size = new Size(786, 153);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            tableLayoutPanel1.Size = new Size(686, 115);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // label1
@@ -219,7 +238,7 @@
             label1.Dock = DockStyle.Fill;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(143, 54);
+            label1.Size = new Size(124, 41);
             label1.TabIndex = 2;
             label1.Text = "Type of item:";
             // 
@@ -227,54 +246,55 @@
             // 
             label4.AutoSize = true;
             label4.Dock = DockStyle.Fill;
-            label4.Location = new Point(3, 54);
+            label4.Location = new Point(3, 41);
             label4.Name = "label4";
-            label4.Size = new Size(143, 51);
+            label4.Size = new Size(124, 38);
             label4.TabIndex = 4;
             label4.Text = "Sort by:";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(3, 105);
+            label9.Location = new Point(3, 79);
             label9.Name = "label9";
-            label9.Size = new Size(76, 20);
+            label9.Size = new Size(59, 15);
             label9.TabIndex = 6;
             label9.Text = "[disabled]";
             // 
             // comboboxStorageType
             // 
             comboboxStorageType.Dock = DockStyle.Fill;
+            comboboxStorageType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboboxStorageType.FormattingEnabled = true;
             comboboxStorageType.Items.AddRange(new object[] { "Shoe", "Clothing", "Accessory" });
-            comboboxStorageType.Location = new Point(152, 4);
-            comboboxStorageType.Margin = new Padding(3, 4, 3, 4);
+            comboboxStorageType.Location = new Point(133, 3);
             comboboxStorageType.Name = "comboboxStorageType";
-            comboboxStorageType.Size = new Size(631, 28);
+            comboboxStorageType.Size = new Size(550, 23);
             comboboxStorageType.TabIndex = 7;
             comboboxStorageType.SelectedIndexChanged += comboboxStorageType_SelectedIndexChanged;
             // 
             // comboboxStorageSort
             // 
             comboboxStorageSort.Dock = DockStyle.Fill;
+            comboboxStorageSort.DropDownStyle = ComboBoxStyle.DropDownList;
             comboboxStorageSort.FormattingEnabled = true;
             comboboxStorageSort.Items.AddRange(new object[] { "Name", "Stock", "Price" });
-            comboboxStorageSort.Location = new Point(152, 58);
-            comboboxStorageSort.Margin = new Padding(3, 4, 3, 4);
+            comboboxStorageSort.Location = new Point(133, 44);
             comboboxStorageSort.Name = "comboboxStorageSort";
-            comboboxStorageSort.Size = new Size(631, 28);
+            comboboxStorageSort.Size = new Size(550, 23);
             comboboxStorageSort.TabIndex = 8;
             comboboxStorageSort.SelectedIndexChanged += comboboxStorageSort_SelectedIndexChanged;
             // 
             // comboboxStorageExtrafilter
             // 
             comboboxStorageExtrafilter.Dock = DockStyle.Fill;
+            comboboxStorageExtrafilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboboxStorageExtrafilter.Enabled = false;
             comboboxStorageExtrafilter.FormattingEnabled = true;
             comboboxStorageExtrafilter.Items.AddRange(new object[] { "ALL", "Bag", "Watch", "Drink" });
-            comboboxStorageExtrafilter.Location = new Point(152, 109);
-            comboboxStorageExtrafilter.Margin = new Padding(3, 4, 3, 4);
+            comboboxStorageExtrafilter.Location = new Point(133, 82);
             comboboxStorageExtrafilter.Name = "comboboxStorageExtrafilter";
-            comboboxStorageExtrafilter.Size = new Size(631, 28);
+            comboboxStorageExtrafilter.Size = new Size(550, 23);
             comboboxStorageExtrafilter.TabIndex = 9;
             comboboxStorageExtrafilter.SelectedIndexChanged += comboboxStorageExtrafilter_SelectedIndexChanged;
             // 
@@ -282,10 +302,11 @@
             // 
             tabAdd.Controls.Add(groupBox2);
             tabAdd.Controls.Add(tableLayoutPanel3);
-            tabAdd.Location = new Point(4, 29);
+            tabAdd.Location = new Point(4, 24);
+            tabAdd.Margin = new Padding(3, 2, 3, 2);
             tabAdd.Name = "tabAdd";
-            tabAdd.Padding = new Padding(3);
-            tabAdd.Size = new Size(792, 418);
+            tabAdd.Padding = new Padding(3, 2, 3, 2);
+            tabAdd.Size = new Size(692, 310);
             tabAdd.TabIndex = 5;
             tabAdd.Text = "Add new items";
             tabAdd.UseVisualStyleBackColor = true;
@@ -295,11 +316,9 @@
             groupBox2.Controls.Add(groupBox1);
             groupBox2.Controls.Add(buttonAddSubmit);
             groupBox2.Dock = DockStyle.Bottom;
-            groupBox2.Location = new Point(3, 111);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Location = new Point(3, 80);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(786, 304);
+            groupBox2.Size = new Size(686, 228);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             // 
@@ -308,11 +327,9 @@
             groupBox1.Controls.Add(textboxAddDetails);
             groupBox1.Controls.Add(labelAddDetails);
             groupBox1.Dock = DockStyle.Top;
-            groupBox1.Location = new Point(3, 24);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Location = new Point(3, 19);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(780, 96);
+            groupBox1.Size = new Size(680, 72);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Enter details:";
@@ -320,30 +337,28 @@
             // textboxAddDetails
             // 
             textboxAddDetails.Dock = DockStyle.Bottom;
-            textboxAddDetails.Location = new Point(3, 65);
-            textboxAddDetails.Margin = new Padding(3, 4, 3, 4);
+            textboxAddDetails.Location = new Point(3, 46);
             textboxAddDetails.Name = "textboxAddDetails";
-            textboxAddDetails.Size = new Size(774, 27);
+            textboxAddDetails.Size = new Size(674, 23);
             textboxAddDetails.TabIndex = 1;
             // 
             // labelAddDetails
             // 
             labelAddDetails.AutoSize = true;
             labelAddDetails.Dock = DockStyle.Top;
-            labelAddDetails.Location = new Point(3, 24);
+            labelAddDetails.Location = new Point(3, 19);
             labelAddDetails.Name = "labelAddDetails";
             labelAddDetails.RightToLeft = RightToLeft.No;
-            labelAddDetails.Size = new Size(138, 20);
+            labelAddDetails.Size = new Size(112, 15);
             labelAddDetails.TabIndex = 0;
             labelAddDetails.Text = "Name, Stock, Price, ";
             // 
             // buttonAddSubmit
             // 
             buttonAddSubmit.Dock = DockStyle.Bottom;
-            buttonAddSubmit.Location = new Point(3, 185);
-            buttonAddSubmit.Margin = new Padding(3, 4, 3, 4);
+            buttonAddSubmit.Location = new Point(3, 139);
             buttonAddSubmit.Name = "buttonAddSubmit";
-            buttonAddSubmit.Size = new Size(780, 115);
+            buttonAddSubmit.Size = new Size(680, 86);
             buttonAddSubmit.TabIndex = 4;
             buttonAddSubmit.Text = "submit";
             buttonAddSubmit.UseVisualStyleBackColor = true;
@@ -359,13 +374,14 @@
             tableLayoutPanel3.Controls.Add(comboboxAddType, 1, 0);
             tableLayoutPanel3.Controls.Add(comboboxAddExtra, 1, 1);
             tableLayoutPanel3.Dock = DockStyle.Top;
-            tableLayoutPanel3.Location = new Point(3, 3);
+            tableLayoutPanel3.Location = new Point(3, 2);
+            tableLayoutPanel3.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 57.1428566F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
-            tableLayoutPanel3.Size = new Size(786, 97);
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            tableLayoutPanel3.Size = new Size(686, 73);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // label3
@@ -374,7 +390,7 @@
             label3.Dock = DockStyle.Fill;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(143, 45);
+            label3.Size = new Size(124, 35);
             label3.TabIndex = 2;
             label3.Text = "Type of item:";
             // 
@@ -382,33 +398,34 @@
             // 
             label10.AutoSize = true;
             label10.Dock = DockStyle.Fill;
-            label10.Location = new Point(3, 45);
+            label10.Location = new Point(3, 35);
             label10.Name = "label10";
-            label10.Size = new Size(143, 52);
+            label10.Size = new Size(124, 38);
             label10.TabIndex = 4;
             label10.Text = "[Disabled]";
             // 
             // comboboxAddType
             // 
             comboboxAddType.Dock = DockStyle.Fill;
+            comboboxAddType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboboxAddType.FormattingEnabled = true;
             comboboxAddType.Items.AddRange(new object[] { "Shoe", "Clothing", "Accessory" });
-            comboboxAddType.Location = new Point(152, 4);
-            comboboxAddType.Margin = new Padding(3, 4, 3, 4);
+            comboboxAddType.Location = new Point(133, 3);
             comboboxAddType.Name = "comboboxAddType";
-            comboboxAddType.Size = new Size(631, 28);
+            comboboxAddType.Size = new Size(550, 23);
             comboboxAddType.TabIndex = 7;
             comboboxAddType.SelectedIndexChanged += comboboxAddType_SelectedIndexChanged;
             // 
             // comboboxAddExtra
             // 
             comboboxAddExtra.Dock = DockStyle.Fill;
+            comboboxAddExtra.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboboxAddExtra.Enabled = false;
             comboboxAddExtra.FormattingEnabled = true;
             comboboxAddExtra.Items.AddRange(new object[] { "Name", "Stock", "Price" });
-            comboboxAddExtra.Location = new Point(152, 49);
-            comboboxAddExtra.Margin = new Padding(3, 4, 3, 4);
+            comboboxAddExtra.Location = new Point(133, 38);
             comboboxAddExtra.Name = "comboboxAddExtra";
-            comboboxAddExtra.Size = new Size(631, 28);
+            comboboxAddExtra.Size = new Size(550, 23);
             comboboxAddExtra.TabIndex = 8;
             comboboxAddExtra.SelectedIndexChanged += comboboxAddExtra_SelectedIndexChanged;
             // 
@@ -441,7 +458,7 @@
             comboBox1.Items.AddRange(new object[] { "Shoes", "Clothing", "Assesories" });
             comboBox1.Location = new Point(46, 3);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
+            comboBox1.Size = new Size(151, 23);
             comboBox1.TabIndex = 3;
             // 
             // tabPage1
@@ -453,13 +470,15 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 451);
+            ClientSize = new Size(700, 338);
             Controls.Add(tabControl);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             tabControl.ResumeLayout(false);
+            introTab.ResumeLayout(false);
             Storage.ResumeLayout(false);
             tableStorageItems.ResumeLayout(false);
             tableStorageItems.PerformLayout();
@@ -511,5 +530,6 @@
         private GroupBox groupBox2;
         private TextBox textboxAddDetails;
         private Button buttonAddSubmit;
+        private RichTextBox richTextBox1;
     }
 }

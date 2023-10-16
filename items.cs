@@ -30,10 +30,10 @@ public class StockSystem {
 //------------------------------------------------------------------------------------------------------------------------------
 //# classes that doesn't call non-system objects
 
-public class Item {
+public abstract class Item {
     public string name;
     public decimal price;
-    public int stock; 
+    public int stock;
     //^ USING "{get; set;}" DEFEATS THE PURPOSE OF USING PRIVATE ACCESS MODIFIER! (hence why I used public instead)
     // public int orderStockLevel;
     public Item(string name, decimal price, int stock) {
@@ -45,13 +45,13 @@ public class Item {
     public bool sell(int qty) { //* modifier
         int checkStock = this.stock - qty;
 
-        if(checkStock < 0) { return false; }
+        if (checkStock < 0) { return false; }
         return true;
     }
     public void add(int qty) { //* modifier
-
         this.stock += qty;
     }
+    public abstract string giveUniqueDetails();
 }
 
 public class Shoe : Item{
@@ -60,6 +60,9 @@ public class Shoe : Item{
     public Shoe(string name, decimal price, int stock, decimal size, string type) : base(name, price, stock) {
         this.size = size;
         this.type = type;
+    }
+    override public string giveUniqueDetails() { //* accessor
+        return $"size - {this.size}, type - {this.type}";
     }
 }
 public class Clothing : Item {
@@ -71,11 +74,17 @@ public class Clothing : Item {
         this.type = type;
         this.style = style;
     }
+    override public string giveUniqueDetails() { //* accessor
+        return $"size - {this.size}, type - {this.type}, style - {this.style}";
+    }
 }
 public class Accessory : Item {
     string accessoryType;
     public Accessory(string name, decimal price, int stock) : base(name, price, stock) {
         this.accessoryType = "heuristic text";
+    }
+    override public string giveUniqueDetails() { //* accessor
+        return $"type - {this.accessoryType}";
     }
 }
 //------------------------------------------------------------------------------------------------------------------------------

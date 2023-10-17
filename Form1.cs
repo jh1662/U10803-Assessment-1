@@ -18,23 +18,42 @@ namespace U10803___Assessment_1 {
         }
         #endregion
 
-        public int[] bubbleSort(int[] array) {
-            int len = array.Length;
-            int temp;
+        public Boolean isBigger(Item item1, Item item2, int toCompare) {
+            switch (toCompare) {
+                case 1:
+                    if (item1.price > item2.price) { return true; }
+                    return false;
+                case 2:
+                    if (item1.stock > item2.stock) { return true; }
+                    return false;
+                default:
+                    int length;
+                    if (item1.name.Length < item2.name.Length) { length = item1.name.Length; }
+                    else { length = item2.name.Length; }
+                    for (int i = 0; i < item1.name.Length; i++) {
+                        if (item1.name[i] > item2.name[i]) { return true; }
+                        if (item1.name[i] < item2.name[i]) { return false; }
+                    }
+                    return false;
+            }
+        }
+        public Item[] bubbleSort(Item[] itemArr, int toCompare) {
+            int len = itemArr.Length;
+            Item temp;
             bool inactiveLoop;
             for (int index1 = 0; index1 < len - 1; index1++) {
                 inactiveLoop = true;
                 for (int index2 = 0; index2 < len - 1; index2++) {
-                    if (array[index2] > array[index2 + 1]) {
+                    if (isBigger(itemArr[index2], itemArr[index2 + 1], toCompare)) {
                         inactiveLoop = false;
-                        temp = array[index2];
-                        array[index2] = array[index2 + 1];
-                        array[index2 + 1] = temp;
+                        temp = itemArr[index2];
+                        itemArr[index2] = itemArr[index2 + 1];
+                        itemArr[index2 + 1] = temp;
                     }
                 }
-                if (inactiveLoop) { return array; }
+                if (inactiveLoop) { return itemArr; }
             }
-            return array;
+            return itemArr;
         }
 
         #region tab - Storage
@@ -44,7 +63,7 @@ namespace U10803___Assessment_1 {
         }
         private void comboboxStorageSort_SelectedIndexChanged(object sender, EventArgs e) {
             //! 0 - Name, 1 - Stock, 2 - Price
-            //UIStorageUpdate();
+            UIStorageUpdate();
         }
         private void comboboxStorageExtrafilter_SelectedIndexChanged(object sender, EventArgs e) {
             UIStorageUpdate();
@@ -55,8 +74,9 @@ namespace U10803___Assessment_1 {
             int sort = comboboxStorageSort.SelectedIndex;
             List<Item> itemList = new List<Item>();
             Item[] itemArr;
-
             Type classType;
+
+            //if (type == null) { return; }
 
             switch (type) {
                 case 0: classType = typeof(Shoe); break;
@@ -70,11 +90,23 @@ namespace U10803___Assessment_1 {
                 }
             }
             itemArr = itemList.ToArray();
+            itemArr = bubbleSort(itemArr, sort);
 
-            tableStorageItems.RowCount = 1;
-            List<Label> labelsBuffer = new List<Label>();
+            //tableStorageItems.RowCount = 1;
+            //List<Label> labelsBuffer = new List<Label>();
+            labelStorageListName.Text = "";
+            labelStorageListPrice.Text = "";
+            labelStorageListStock.Text = "";
+            labelStorageListUnique.Text = "";
+
             int labelsBufferPointer = 0;
             for (int i = 0; i < itemArr.Length; i++) {
+                labelStorageListName.Text += "\n\n" + itemArr[i].name;
+                labelStorageListPrice.Text += "\n\n" + itemArr[i].price;
+                labelStorageListStock.Text += "\n\n" + itemArr[i].stock;
+                labelStorageListUnique.Text += "\n\n" + itemArr[i].price;
+
+                /*
                 tableStorageItems.RowCount++;
 
                 labelsBuffer.Add(new Label());
@@ -97,6 +129,7 @@ namespace U10803___Assessment_1 {
                 labelsBuffer[labelsBufferPointer].Text = itemArr[i].giveUniqueDetails();
                 tableStorageItems.Controls.Add(labelsBuffer[labelsBufferPointer], 3, i + 1);
                 labelsBufferPointer++;
+                */
             }
         }
         #endregion
@@ -146,22 +179,43 @@ namespace U10803___Assessment_1 {
                 case 0:
                     groupVerification.Add(decimal.TryParse(saperatedInputs[3], out decimal shoeSize));
                     string shoeType = saperatedInputs[4];
-                    if (groupVerification.Contains(false)) { MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR"); }
+                    if (groupVerification.Contains(false)) {
+                        MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
+                        break;
+                    }
                     Shoe shoeObj = new Shoe(name, price, stock, shoeSize, shoeType);
-                    if (!stockSystem.add(shoeObj)) { MessageBox.Show("Item (by name) aleady exists", "ERROR"); }
+                    if (!stockSystem.add(shoeObj)) {
+                        MessageBox.Show("Item (by name) aleady exists", "ERROR");
+                        break;
+                    }
+                    MessageBox.Show("Item creation successful", "successful action");
                     break;
                 case 1:
                     groupVerification.Add(int.TryParse(saperatedInputs[3], out int clothingSize));
                     string clothingType = saperatedInputs[4];
                     string style = saperatedInputs[5];
-                    if (groupVerification.Contains(false)) { MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR"); }
+                    if (groupVerification.Contains(false)) {
+                        MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
+                        break;
+                    }
                     Clothing clothingObj = new Clothing(name, price, stock, clothingSize, clothingType, style);
-                    if (!stockSystem.add(clothingObj)) { MessageBox.Show("Item (by name) aleady exists", "ERROR"); }
+                    if (!stockSystem.add(clothingObj)) {
+                        MessageBox.Show("Item (by name) aleady exists", "ERROR");
+                        break;
+                    }
+                    MessageBox.Show("Item creation successful", "successful action");
                     break;
                 default:
                     Accessory accessoryObj = new Accessory(name, price, stock);
-                    if (groupVerification.Contains(false)) { MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR"); }
-                    if (!stockSystem.add(accessoryObj)) { MessageBox.Show("Item (by name) aleady exists", "ERROR"); }
+                    if (groupVerification.Contains(false)) {
+                        MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
+                        break;
+                    }
+                    if (!stockSystem.add(accessoryObj)) {
+                        MessageBox.Show("Item (by name) aleady exists", "ERROR");
+                        break;
+                    }
+                    MessageBox.Show("Item creation successful", "successful action");
                     break;
             }
         }

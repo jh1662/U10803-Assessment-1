@@ -23,23 +23,3 @@ public class Purchase {
         this.items = items;
     }
 }
-
-public class Supplier {
-    string name;
-    public Dictionary<string, int> stockList = new Dictionary<string, int>();
-    public Supplier(string name) {
-        this.name = name;
-    }
-
-    public void order(string itemName, int qty) {
-
-        stockList[itemName] += qty;
-    }
-    public bool restock(string itemName, int qty) {
-
-        if (!stockList.ContainsKey(itemName)) { return false; }
-        if ((stockList[itemName]-qty)<0) { return false; }
-        stockList[itemName] -= qty;
-        return true;
-    }
-}

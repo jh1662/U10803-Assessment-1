@@ -1,4 +1,5 @@
-﻿public class Customer {
+﻿#region dependent classes
+public class Customer {
     public string name;
     public string email;
     public List<Purchase> purchases = new List<Purchase>();
@@ -12,7 +13,8 @@
         purchases.Add(purchase);
     }
 }
-
+#endregion
+#region independent classes
 public class Purchase {
     public DateTime saleDate;
     public decimal price;
@@ -23,3 +25,4 @@ public class Purchase {
         this.items = items;
     }
 }
+#endregion

@@ -7,6 +7,7 @@ public class SupplyLines { //* dependent
         return true;
     }
 }
+#endregion
 #region independent classes
 public class Supplier { //* independent
     string name;
@@ -26,3 +27,4 @@ public class Supplier { //* independent
         return true;
     }
 }
+#endregion

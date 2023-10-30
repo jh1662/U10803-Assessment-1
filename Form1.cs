@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace U10803___Assessment_1 {
     public partial class Form1 : Form {
         //: instansiatating own
         StockSystem stockSystem = new StockSystem();
+        SupplyLines supplyLines = new SupplyLines();
         int numberOfDetails;
         public Form1() {
             InitializeComponent();
@@ -240,6 +242,40 @@ namespace U10803___Assessment_1 {
         }
         private void comboboxAddExtra_SelectedIndexChanged(object sender, EventArgs e) {
 
+        }
+        #endregion
+
+        #region Supplier
+        private void buttonSupplierAdd_Click(object sender, EventArgs e) {
+            string input = textboxSupplierAdd.Text.Trim().ToLower();
+            if (input == "") {
+                MessageBox.Show("can't leave the name blank!", "error");
+                return;
+            }
+            if (supplyLines.Add("input") == false) {
+                MessageBox.Show("supplier name already exists!", "error");
+                return;
+            }
+            supplierViewRefresh();
+        }
+
+        private void supplierViewRefresh() {
+            if (supplyLines.SupplierDict.Count == 0) { return; }
+
+            labelSupplierViewName.Text = string.Empty;
+            labelSupplierViewStock.Text = string.Empty;
+            string[] supplierNames = supplyLines.SupplierDict.Keys.ToArray();
+            string[] supplierStock = new string[supplierNames.Length - 1];
+
+            for (int i = 0; i < supplierNames.Length; i++) {
+                foreach (KeyValuePair<string, int> pair in supplyLines.SupplierDict[supplierNames[i]].stockDict) {
+                    supplierStock[i] += $"{pair.Key} - {pair.Value}, ";
+                }
+            }
+            for (int i = 0; i < supplierNames.Length; i++) {
+                labelSupplierViewName.Text += supplierNames[i];
+                labelSupplierViewStock.Text += supplierStock[i];
+            }
         }
         #endregion
     }

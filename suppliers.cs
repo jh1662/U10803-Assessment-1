@@ -12,11 +12,14 @@ public class SupplyLines { //* dependent
 public class Supplier { //* independent
     string name;
     public Dictionary<string, int> stockDict = new Dictionary<string, int>();
-    public Supplier(string name) {
+    public Supplier(string name) { 
         this.name = name;
     }
     public void order(string itemName, int qty) {
-
+        if (!stockDict.ContainsKey(itemName)) {
+            stockDict[itemName] = qty;
+            return;
+        }
         stockDict[itemName] += qty;
     }
     public bool restock(string itemName, int qty) {

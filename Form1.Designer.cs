@@ -1,7 +1,5 @@
-﻿namespace U10803___Assessment_1
-{
-    partial class Form1
-    {
+﻿namespace U10803___Assessment_1 {
+    partial class Form1 {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         ///  Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,13 +22,20 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             tabControl = new TabControl();
             introTab = new TabPage();
             richTextBox1 = new RichTextBox();
             tabCheckout = new TabPage();
             tabCustomers = new TabPage();
+            tabControl1 = new TabControl();
+            tabPage5 = new TabPage();
+            tabPage6 = new TabPage();
+            tableLayoutPanel8 = new TableLayoutPanel();
+            label20 = new Label();
+            label21 = new Label();
+            textboxCustomerAddName = new TextBox();
+            textboxCustomerAddEmail = new TextBox();
             tabSuppliers = new TabPage();
             tabControlSupplier = new TabControl();
             tabPage3 = new TabPage();
@@ -94,8 +97,13 @@
             label2 = new Label();
             comboBox1 = new ComboBox();
             tabPage1 = new TabPage();
+            buttonCustomerAdd = new Button();
             tabControl.SuspendLayout();
             introTab.SuspendLayout();
+            tabCustomers.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage6.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
             tabSuppliers.SuspendLayout();
             tabControlSupplier.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -165,6 +173,7 @@
             // 
             // tabCustomers
             // 
+            tabCustomers.Controls.Add(tabControl1);
             tabCustomers.Location = new Point(4, 29);
             tabCustomers.Name = "tabCustomers";
             tabCustomers.Padding = new Padding(3);
@@ -172,6 +181,96 @@
             tabCustomers.TabIndex = 2;
             tabCustomers.Text = "Customers";
             tabCustomers.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage6);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(3, 3);
+            tabControl1.Margin = new Padding(3, 4, 3, 4);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(927, 427);
+            tabControl1.TabIndex = 1;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Location = new Point(4, 29);
+            tabPage5.Margin = new Padding(3, 4, 3, 4);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3, 4, 3, 4);
+            tabPage5.Size = new Size(919, 394);
+            tabPage5.TabIndex = 1;
+            tabPage5.Text = "view customers";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            tabPage6.Controls.Add(buttonCustomerAdd);
+            tabPage6.Controls.Add(tableLayoutPanel8);
+            tabPage6.Location = new Point(4, 29);
+            tabPage6.Margin = new Padding(3, 4, 3, 4);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Size = new Size(919, 394);
+            tabPage6.TabIndex = 2;
+            tabPage6.Text = "add customers";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel8
+            // 
+            tableLayoutPanel8.ColumnCount = 2;
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.9453831F));
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 82.05462F));
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            tableLayoutPanel8.Controls.Add(label20, 0, 1);
+            tableLayoutPanel8.Controls.Add(label21, 0, 0);
+            tableLayoutPanel8.Controls.Add(textboxCustomerAddName, 1, 0);
+            tableLayoutPanel8.Controls.Add(textboxCustomerAddEmail, 1, 1);
+            tableLayoutPanel8.Dock = DockStyle.Top;
+            tableLayoutPanel8.Location = new Point(0, 0);
+            tableLayoutPanel8.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 2;
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+            tableLayoutPanel8.Size = new Size(919, 85);
+            tableLayoutPanel8.TabIndex = 2;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(3, 40);
+            label20.Name = "label20";
+            label20.Size = new Size(49, 20);
+            label20.TabIndex = 3;
+            label20.Text = "Email:";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(3, 0);
+            label21.Name = "label21";
+            label21.Size = new Size(52, 20);
+            label21.TabIndex = 0;
+            label21.Text = "Name:";
+            // 
+            // textboxCustomerAddName
+            // 
+            textboxCustomerAddName.Location = new Point(167, 4);
+            textboxCustomerAddName.Margin = new Padding(3, 4, 3, 4);
+            textboxCustomerAddName.Name = "textboxCustomerAddName";
+            textboxCustomerAddName.Size = new Size(749, 27);
+            textboxCustomerAddName.TabIndex = 1;
+            // 
+            // textboxCustomerAddEmail
+            // 
+            textboxCustomerAddEmail.Location = new Point(167, 44);
+            textboxCustomerAddEmail.Margin = new Padding(3, 4, 3, 4);
+            textboxCustomerAddEmail.Name = "textboxCustomerAddEmail";
+            textboxCustomerAddEmail.Size = new Size(749, 27);
+            textboxCustomerAddEmail.TabIndex = 4;
             // 
             // tabSuppliers
             // 
@@ -876,6 +975,16 @@
             tabPage1.Size = new Size(200, 100);
             tabPage1.TabIndex = 0;
             // 
+            // buttonCustomerAdd
+            // 
+            buttonCustomerAdd.Location = new Point(16, 92);
+            buttonCustomerAdd.Name = "buttonCustomerAdd";
+            buttonCustomerAdd.Size = new Size(133, 29);
+            buttonCustomerAdd.TabIndex = 3;
+            buttonCustomerAdd.Text = "add customer";
+            buttonCustomerAdd.UseVisualStyleBackColor = true;
+            buttonCustomerAdd.Click += buttonCustomerAdd_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -886,6 +995,11 @@
             Text = "Form1";
             tabControl.ResumeLayout(false);
             introTab.ResumeLayout(false);
+            tabCustomers.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
+            tabPage6.ResumeLayout(false);
+            tableLayoutPanel8.ResumeLayout(false);
+            tableLayoutPanel8.PerformLayout();
             tabSuppliers.ResumeLayout(false);
             tabControlSupplier.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
@@ -986,5 +1100,14 @@
         private TextBox textboxSupplierOrderQty;
         private GroupBox groupBox3;
         private Button ButtonSupplierOrder;
+        private TabControl tabControl1;
+        private TabPage tabPage5;
+        private TabPage tabPage6;
+        private TableLayoutPanel tableLayoutPanel8;
+        private Label label20;
+        private Label label21;
+        private TextBox textboxCustomerAddName;
+        private TextBox textboxCustomerAddEmail;
+        private Button buttonCustomerAdd;
     }
 }

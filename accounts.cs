@@ -1,4 +1,19 @@
 ﻿#region dependent classes
+using System.Web;
+
+public class AllCustomers {
+    public Dictionary<string, Customer> accounts = new Dictionary<string,Customer>();
+    public bool findEmail(string email) {
+        if (accounts.ContainsKey(email)) { return true; }; 
+        return false;
+    }
+    public void addCustomer(string email, string name) {
+        accounts.Add(email, new Customer(name, email));
+    }
+    public void viewCustomer(string email) {
+        return;
+    }
+}
 public class Customer {
     public string name;
     public string email;

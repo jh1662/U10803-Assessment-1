@@ -149,6 +149,7 @@ namespace U10803___Assessment_1 {
             int counts = 0;
 
             //: critical verification
+            if (input == "") { return new string[] { }; }
             if (input[0] == ',' || input[input.Length - 1] == ',') { return new string[] { }; }
             foreach (char letter in input) {
                 if (letter == ',') { counts++; }
@@ -375,7 +376,7 @@ namespace U10803___Assessment_1 {
             }
             if (atSymbolCount != 1) { return false; }
             //^ few sources allows more than one '@' symbol in a single email address, but most others don't... I'm confused.
-            //^ ... well a customer should use an inappropiate valid email anyway like:
+            //^ ... well a customer shouldn't use an inappropiate valid email anyway like:
             //^ "very.(),:;<>[]\".VERY.\"very@\\ \"very\".unusual"@strange.example.com
             //^ https://en.wikipedia.org/wiki/Email_address#Examples
             return true;
@@ -383,7 +384,7 @@ namespace U10803___Assessment_1 {
         private void buttonCustomerAdd_Click(object sender, EventArgs e) {
             string name = textboxCustomerAddName.Text.Trim().ToUpper();
             string email = textboxCustomerAddEmail.Text.Trim().ToUpper();
-            if (verifyEmail(email)) { 
+            if (!verifyEmail(email)) {
                 MessageBox.Show("invalid email format", "error");
                 return;
             }
@@ -396,7 +397,86 @@ namespace U10803___Assessment_1 {
                 return;
             }
             allCustomers.addCustomer(email, name);
+            MessageBox.Show("customer (with email) added successfully", "successful action");
+            refreshRecents();
+        }
+
+        private void refreshRecents() {
+            string[] emails = allCustomers.viewAllEmails();
+            string[] names = allCustomers.viewAllNames();
+
+            labelCustomerAddRecentEmail.Text = "";
+            labelCustomerAddRecentName.Text = "";
+            for (int i = 0; i < emails.Length; i++) {
+                labelCustomerAddRecentEmail.Text += (emails[i] + "\n");
+                labelCustomerAddRecentName.Text += (names[i] + "\n");
+            }
+        }
+        private void buttonCustomerViewInspect_Click(object sender, EventArgs e) {
+            string email = textboxCustomerView.Text;
+            Purchase[] purchases;
+
+            labelCustomerViewPurchaseDate.Text = "";
+            labelCustomerViewPurchaseItems.Text = "";
+            labelCustomerViewPurchaseCost.Text = "";
+
+            if (!allCustomers.findEmail(email)) {
+                MessageBox.Show("customer (by email) does not exist", "error");
+                return;
+            }
+
+            purchases = allCustomers.viewCustomer(email).purchases.ToArray();
+            if (purchases.Length == 0) { return; }
+            foreach (Purchase purchase in purchases) {
+                labelCustomerViewPurchaseDate.Text += (purchase.saleDate + "\n");
+                labelCustomerViewPurchaseItems.Text += purchasedItemsToString(purchase.items);
+                labelCustomerViewPurchaseCost.Text += (purchase.price + "\n");
+            }
+        }
+
+        private string purchasedItemsToString(Dictionary<string, int> purchased) {
+            string purchases = "";
+            string[] names = purchased.Keys.ToArray();
+            /*
+            string[] qtys = Array.ConvertAll(purchased.Values.ToArray(),x=>x.ToString());
+            //^ https://stackoverflow.com/questions/14051257/conversion-from-int-array-to-string-array
+            */
+            int[] qtys = purchased.Values.ToArray();
+            for (int i = 0; i < names.Length; i++) {
+                purchases += names[i] + $" ({qtys[i]})";
+                if (i < names.Length - 1) { purchases += ", "; }
+            }
+            return purchases;
         }
         #endregion
+
+        #region tab - checkout
+        private void buttonCheckoutInspect_Click(object sender, EventArgs e) {
+            string email = textboxCheckoutEmail.Text.Trim().ToUpper();
+            if (allCustomers.findEmail(email)) {
+                MessageBox.Show("customer (by email) is confirmed to exist", "check successful");
+                return;
+            }
+            MessageBox.Show("customer (by email) does not exist", "check unsuccessful");
+        }
+
+        private void buttonCheckoutAdd_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonCheckoutRemove_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonCheckoutSubmit_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonCheckoutCancel_Click(object sender, EventArgs e) {
+
+        }
+        #endregion
+
+
     }
 }

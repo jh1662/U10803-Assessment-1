@@ -10,8 +10,17 @@ public class AllCustomers {
     public void addCustomer(string email, string name) {
         accounts.Add(email, new Customer(name, email));
     }
-    public void viewCustomer(string email) {
-        return;
+    public Customer viewCustomer(string email) {
+        return accounts[email];
+    }
+    public string[] viewAllEmails() {
+        return accounts.Keys.ToArray();
+    }
+    public string[] viewAllNames() {
+        string[] names = new string[accounts.Count];
+        Customer[] customersObjs = accounts.Values.ToArray();
+        for (int i = 0; i < names.Length; i++) { names[i] = customersObjs[i].name; }
+        return names;
     }
 }
 public class Customer {

@@ -80,14 +80,18 @@ public class Clothing : Item {
 }
 public class Accessory : Item {
     string accessoryType;
+    string extraInfo;
     public Accessory(string name, decimal price, int stock) : base(name, price, stock) {
-        this.accessoryType = "heuristic text";
+        this.accessoryType = "heuristic text for type";
+        this.extraInfo = "heuristic text for extra info";
     }
     override public string giveUniqueDetails() { //* accessor
-        return $"type - {this.accessoryType}";
+        return $"type - {this.accessoryType} | extra attributes - {this.extraInfo}";
     }
+
 }
 //------------------------------------------------------------------------------------------------------------------------------
+/*
 #region children of the 'Accessory' class
 public class Bag : Accessory {
     public decimal capacity;
@@ -115,3 +119,4 @@ public class Drink : Accessory {
     }
 }
 #endregion
+*/

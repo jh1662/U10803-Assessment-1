@@ -10,11 +10,12 @@ public class SupplyLines { //* dependent
 #endregion
 #region independent classes
 public class Supplier { //* independent
-    string name;
-    public Dictionary<string, int> stockDict = new Dictionary<string, int>();
+    private string name;
+    private Dictionary<string, int> stockDict = new Dictionary<string, int>();
     public Supplier(string name) { 
         this.name = name;
     }
+    public Dictionary<string, int> StockDict { get { return stockDict; } }
     public void order(string itemName, int qty) {
         if (!stockDict.ContainsKey(itemName)) {
             stockDict[itemName] = qty;

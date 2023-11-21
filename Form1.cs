@@ -216,18 +216,33 @@ namespace U10803___Assessment_1 {
                     MessageBox.Show("Item creation successful", "successful action");
                     break;
                 default:
-                    Accessory accessoryObj = new Accessory(name, price, stock);
+                    
                     if (groupVerification.Contains(false)) {
                         MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
                         break;
                     }
+                    //Accessory accessoryObj = new Accessory(name, price, stock);
+                    /*
                     if (!stockSystem.add(accessoryObj)) {
                         MessageBox.Show("Item (by name) aleady exists", "ERROR");
                         break;
                     }
+                    */
                     MessageBox.Show("Item creation successful", "successful action");
                     break;
             }
+        }
+        private bool addAccessory(string type) {
+            type = type.Trim().ToUpper();
+            switch (type) {
+                case "WATCH":
+                    break;
+                case "BAG":
+                    break;
+                case "DRINK":
+                    break;
+            }
+            return true;
         }
         private void comboboxAddType_SelectedIndexChanged(object sender, EventArgs e) {
             //! 0 - Shoe, 1 - Clothing, 2 - Accessory
@@ -244,7 +259,7 @@ namespace U10803___Assessment_1 {
                     break;
                 default:
                     numberOfDetails = startingQty;
-                    labelAddDetails.Text = starting + ":";
+                    labelAddDetails.Text = starting + "type of accessory:";
                     break;
             }
         }
@@ -263,11 +278,11 @@ namespace U10803___Assessment_1 {
             string[] supplierStock = new string[supplierNames.Length];
 
             for (int i = 0; i < supplierNames.Length; i++) {
-                if (supplyLines.SupplierDict[supplierNames[i]].stockDict.Count == 0) {
+                if (supplyLines.SupplierDict[supplierNames[i]].StockDict.Count == 0) {
                     supplierStock[i] = "None!";
                     continue;
                 }
-                foreach (KeyValuePair<string, int> pair in supplyLines.SupplierDict[supplierNames[i]].stockDict) {
+                foreach (KeyValuePair<string, int> pair in supplyLines.SupplierDict[supplierNames[i]].StockDict) {
                     supplierStock[i] += $"{pair.Key} - {pair.Value}, ";
                 }
             }

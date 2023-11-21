@@ -78,26 +78,28 @@ public class Clothing : Item {
         return $"size - {this.size}, type - {this.type}, style - {this.style}";
     }
 }
-public class Accessory : Item {
-    string accessoryType;
-    string extraInfo;
-    public Accessory(string name, decimal price, int stock) : base(name, price, stock) {
-        this.accessoryType = "heuristic text for type";
-        this.extraInfo = "heuristic text for extra info";
-    }
-    override public string giveUniqueDetails() { //* accessor
-        return $"type - {this.accessoryType} | extra attributes - {this.extraInfo}";
-    }
+//# A clothing shop doesn't primarily sell accessories but if the shop decides to sell them as side-prodcts then they will
+//# most likely sell more types, of accessories, than what the developer can think of (watch, bag, drink, etc). Because of
+//# this, making a class for each accessory type is beyond inpractical unless the program itself can create more classes
+//# during runtime at the user's need/command which makes it besically AI - code that makes more code - at this point.
+//# I would just put the accessories' type and each of thier unique qualities as extra attributes in the only
+//# accessory class but the course-work assesses polymorphism so I'll pretend that those 3 accessories are the only ones
+//# that the shop will ever need.
+public abstract class Accessory : Item {
 
+    public Accessory(string name, decimal price, int stock) : base(name, price, stock) { }
 }
 //------------------------------------------------------------------------------------------------------------------------------
-/*
+
 #region children of the 'Accessory' class
 public class Bag : Accessory {
     public decimal capacity;
     public Bag(string name, decimal price, int stock, decimal capacity) 
     : base(name, price, stock) {
         this.capacity = capacity;
+    }
+    override public string giveUniqueDetails() { //* accessor
+        return $"capacity - {this.capacity}";
     }
 }
 public class Watch : Accessory {
@@ -108,6 +110,9 @@ public class Watch : Accessory {
         this.hasGPS = hasGPS;
         this.hasRate = hasRate;
     }
+    override public string giveUniqueDetails() { //* accessor
+        return $"has GPS - {this.hasGPS}, has heart rate - {this.hasRate}";
+    }
 }
 public class Drink : Accessory {
     public decimal capacity;
@@ -117,6 +122,8 @@ public class Drink : Accessory {
         this.capacity = capacity;
         this.type = type;
     }
+    override public string giveUniqueDetails() { //* accessor
+        return $"capacity - {this.capacity}, type - {this.type}";
+    }
 }
 #endregion
-*/

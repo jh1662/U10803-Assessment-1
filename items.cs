@@ -111,7 +111,7 @@ public class Watch : Accessory {
         this.hasRate = hasRate;
     }
     override public string giveUniqueDetails() { //* accessor
-        return $"has GPS - {this.hasGPS}, has heart rate - {this.hasRate}";
+        return $"has GPS? - {this.hasGPS}, has heart rate? - {this.hasRate}";
     }
 }
 public class Drink : Accessory {

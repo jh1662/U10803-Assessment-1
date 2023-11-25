@@ -64,7 +64,18 @@ namespace U10803___Assessment_1 {
             }
             return itemArr;
         }
-
+        public bool tryBool(string input, out bool result) {
+            result = false;
+            switch (input) {
+                case "Y":
+                    result = true;
+                    return true;
+                case "N":
+                    return true;
+                default:
+                    return false;
+            }
+        }
         #region tab - Storage
         private void comboboxStorageType_SelectedIndexChanged(object sender, EventArgs e) {
             //! 0 - Shoe, 1 - Clothing, 2 - Accessory
@@ -87,6 +98,7 @@ namespace U10803___Assessment_1 {
 
             //if (type == null) { return; }
 
+            /*
             switch (type) {
                 case 0: classType = typeof(Shoe); break;
                 case 1: classType = typeof(Clothing); break;
@@ -96,7 +108,23 @@ namespace U10803___Assessment_1 {
             foreach (Item item in stockSystem.items.Values) {
                 if (item.GetType() == classType) {
                     itemList.Add(item);
+
                 }
+            }
+            */
+            foreach (Item item in stockSystem.items.Values) {
+                switch (type) {
+                    case 0:
+                        if (item is Shoe) { itemList.Add(item); }
+                        break;
+                    case 1:
+                        if (item is Clothing) { itemList.Add(item); }
+                        break;
+                    default:
+                        if (item is Accessory) { itemList.Add(item); }
+                        break;
+                }
+
             }
             itemArr = itemList.ToArray();
             itemArr = bubbleSort(itemArr, sort);
@@ -110,10 +138,10 @@ namespace U10803___Assessment_1 {
 
             //int labelsBufferPointer = 0;
             for (int i = 0; i < itemArr.Length; i++) {
-                labelStorageListName.Text += "\n\n" + itemArr[i].name;
-                labelStorageListPrice.Text += "\n\n" + itemArr[i].price;
-                labelStorageListStock.Text += "\n\n" + itemArr[i].stock;
-                labelStorageListUnique.Text += "\n\n" + itemArr[i].price;
+                labelStorageListName.Text += itemArr[i].name + "\n\n";
+                labelStorageListPrice.Text += itemArr[i].price + "\n\n";
+                labelStorageListStock.Text += itemArr[i].stock + "\n\n";
+                labelStorageListUnique.Text += itemArr[i].giveUniqueDetails() + "\n\n";
 
                 /*
                 tableStorageItems.RowCount++;
@@ -190,7 +218,7 @@ namespace U10803___Assessment_1 {
                     groupVerification.Add(decimal.TryParse(saperatedInputs[3], out decimal shoeSize));
                     string shoeType = saperatedInputs[4];
                     if (groupVerification.Contains(false)) {
-                        MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
+                        MessageBox.Show("atleast one of the properites in the detail entry was in the wrong format", "ERROR");
                         break;
                     }
                     Shoe shoeObj = new Shoe(name, price, stock, shoeSize, shoeType);
@@ -205,7 +233,7 @@ namespace U10803___Assessment_1 {
                     string clothingType = saperatedInputs[4];
                     string style = saperatedInputs[5];
                     if (groupVerification.Contains(false)) {
-                        MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
+                        MessageBox.Show("atleast one of the properites in the detail entry was in the wrong format", "ERROR");
                         break;
                     }
                     Clothing clothingObj = new Clothing(name, price, stock, clothingSize, clothingType, style);
@@ -216,9 +244,8 @@ namespace U10803___Assessment_1 {
                     MessageBox.Show("Item creation successful", "successful action");
                     break;
                 default:
-                    
                     if (groupVerification.Contains(false)) {
-                        MessageBox.Show("one of the properites in the detail entry was in the wrong format", "ERROR");
+                        MessageBox.Show("atleast one of the properites in the detail entry was in the wrong format", "ERROR");
                         break;
                     }
                     //Accessory accessoryObj = new Accessory(name, price, stock);
@@ -228,19 +255,95 @@ namespace U10803___Assessment_1 {
                         break;
                     }
                     */
+                    if (!addAccessory(saperatedInputs[3], name, price, stock)) { break; }
+
                     MessageBox.Show("Item creation successful", "successful action");
                     break;
             }
         }
-        private bool addAccessory(string type) {
+        private bool addAccessory(string type, string name, decimal price, int stock) {
             type = type.Trim().ToUpper();
+            string input;
+            AccessoryForm accessoryForm;
+            string[] extraInfo;
+
             switch (type) {
                 case "WATCH":
+                    bool infoHasGPS;
+                    bool infoHasRate;
+
+                    accessoryForm = new AccessoryForm(1);
+                    accessoryForm.ShowDialog();
+                    input = accessoryForm.Input;
+                    extraInfo = verifyDetailsInput(input, 2);
+
+                    if (extraInfo.Length == 0) {
+                        MessageBox.Show("You did not type the details in the text box properly!", "ERROR");
+                        return false;
+                    }
+                    if (!tryBool(extraInfo[0], out infoHasGPS) || !tryBool(extraInfo[1], out infoHasRate)) {
+                        MessageBox.Show("atleast one of the properites in the extra-info entry was in the wrong format", "ERROR");
+                        return false;
+                    }
+
+                    Watch watch = new Watch(name, price, stock, infoHasGPS, infoHasRate);
+                    if (!stockSystem.add(watch)) {
+                        MessageBox.Show("accessory (by name) already exists", "ERROR");
+                        return false;
+                    }
+
                     break;
                 case "BAG":
+                    decimal infoCapacityBag;
+
+                    accessoryForm = new AccessoryForm(2);
+                    accessoryForm.ShowDialog();
+                    input = accessoryForm.Input;
+                    extraInfo = verifyDetailsInput(input, 1);
+
+                    if (extraInfo.Length == 0) {
+                        MessageBox.Show("You did not type the details in the text box properly!", "ERROR");
+                        return false;
+                    }
+                    if (!decimal.TryParse(extraInfo[0], out infoCapacityBag)) {
+                        MessageBox.Show("atleast one of the properites in the extra-info entry was in the wrong format", "ERROR");
+                        return false;
+                    }
+                    Bag bag = new Bag(name, price, stock, infoCapacityBag);
+                    if (!stockSystem.add(bag)) {
+                        MessageBox.Show("accessory (by name) already exists", "ERROR");
+                        return false;
+                    }
+
                     break;
                 case "DRINK":
+                    decimal infoCapacityDrink;
+                    string infoType;
+
+                    accessoryForm = new AccessoryForm(3);
+                    accessoryForm.ShowDialog();
+                    input = accessoryForm.Input;
+                    extraInfo = verifyDetailsInput(input, 2);
+
+                    if (extraInfo.Length == 0) {
+                        MessageBox.Show("You did not type the details in the text box properly!", "ERROR");
+                        return false;
+                    }
+                    if (!decimal.TryParse(extraInfo[0], out infoCapacityDrink)) {
+                        MessageBox.Show("atleast one of the properites in the extra-info entry was in the wrong format", "ERROR");
+                        return false;
+                    }
+                    infoType = extraInfo[1];
+                    Drink drink = new Drink(name, price, stock, infoCapacityDrink, infoType);
+                    if (!stockSystem.add(drink)) {
+                        MessageBox.Show("accessory (by name) already exists", "ERROR");
+                        return false;
+                    }
+
                     break;
+                default:
+                    MessageBox.Show("type of accessory does not exist", "ERROR");
+                    return false;
             }
             return true;
         }
@@ -258,7 +361,7 @@ namespace U10803___Assessment_1 {
                     labelAddDetails.Text = starting + "size (int), type, style: ";
                     break;
                 default:
-                    numberOfDetails = startingQty;
+                    numberOfDetails = startingQty + 1;
                     labelAddDetails.Text = starting + "type of accessory:";
                     break;
             }

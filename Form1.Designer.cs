@@ -131,9 +131,7 @@
             buttonAddSubmit = new Button();
             tableLayoutPanel3 = new TableLayoutPanel();
             label3 = new Label();
-            label10 = new Label();
             comboboxAddType = new ComboBox();
-            comboboxAddExtra = new ComboBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             label2 = new Label();
             comboBox1 = new ComboBox();
@@ -209,7 +207,7 @@
             introTab.Controls.Add(richTextBox1);
             introTab.Location = new Point(4, 29);
             introTab.Name = "introTab";
-            introTab.Padding = new Padding(3, 3, 3, 3);
+            introTab.Padding = new Padding(3);
             introTab.Size = new Size(933, 434);
             introTab.TabIndex = 0;
             introTab.Text = "Introduction";
@@ -236,7 +234,7 @@
             tabCheckout.Controls.Add(tableLayoutPanel16);
             tabCheckout.Location = new Point(4, 29);
             tabCheckout.Name = "tabCheckout";
-            tabCheckout.Padding = new Padding(3, 3, 3, 3);
+            tabCheckout.Padding = new Padding(3);
             tabCheckout.Size = new Size(933, 434);
             tabCheckout.TabIndex = 1;
             tabCheckout.Text = "Checkout";
@@ -245,8 +243,8 @@
             // tableLayoutPanel18
             // 
             tableLayoutPanel18.ColumnCount = 2;
-            tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30.8681679F));
+            tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 69.1318359F));
             tableLayoutPanel18.Controls.Add(label36, 0, 0);
             tableLayoutPanel18.Controls.Add(labelCheckoutTotalPrice, 1, 0);
             tableLayoutPanel18.Location = new Point(409, 145);
@@ -254,7 +252,7 @@
             tableLayoutPanel18.Name = "tableLayoutPanel18";
             tableLayoutPanel18.RowCount = 1;
             tableLayoutPanel18.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel18.Size = new Size(229, 35);
+            tableLayoutPanel18.Size = new Size(311, 35);
             tableLayoutPanel18.TabIndex = 7;
             // 
             // label36
@@ -269,7 +267,7 @@
             // labelCheckoutTotalPrice
             // 
             labelCheckoutTotalPrice.AutoSize = true;
-            labelCheckoutTotalPrice.Location = new Point(117, 0);
+            labelCheckoutTotalPrice.Location = new Point(99, 0);
             labelCheckoutTotalPrice.Name = "labelCheckoutTotalPrice";
             labelCheckoutTotalPrice.Size = new Size(36, 20);
             labelCheckoutTotalPrice.TabIndex = 1;
@@ -375,8 +373,8 @@
             // tableLayoutPanel12
             // 
             tableLayoutPanel12.ColumnCount = 6;
-            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.8791218F));
-            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 79.12088F));
+            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.00885F));
+            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.99115F));
             tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 55F));
             tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 174F));
             tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 99F));
@@ -422,7 +420,7 @@
             label27.AutoSize = true;
             label27.Location = new Point(3, 0);
             label27.Name = "label27";
-            label27.Size = new Size(39, 40);
+            label27.Size = new Size(42, 20);
             label27.TabIndex = 0;
             label27.Text = "item:";
             // 
@@ -445,10 +443,10 @@
             // 
             // textboxCheckoutItem
             // 
-            textboxCheckoutItem.Location = new Point(50, 4);
+            textboxCheckoutItem.Location = new Point(55, 4);
             textboxCheckoutItem.Margin = new Padding(3, 4, 3, 4);
             textboxCheckoutItem.Name = "textboxCheckoutItem";
-            textboxCheckoutItem.Size = new Size(173, 27);
+            textboxCheckoutItem.Size = new Size(168, 27);
             textboxCheckoutItem.TabIndex = 4;
             // 
             // tableLayoutPanel16
@@ -502,7 +500,7 @@
             tabCustomers.Controls.Add(tabControl1);
             tabCustomers.Location = new Point(4, 29);
             tabCustomers.Name = "tabCustomers";
-            tabCustomers.Padding = new Padding(3, 3, 3, 3);
+            tabCustomers.Padding = new Padding(3);
             tabCustomers.Size = new Size(933, 434);
             tabCustomers.TabIndex = 2;
             tabCustomers.Text = "Customers";
@@ -662,7 +660,7 @@
             tabPage6.Location = new Point(4, 29);
             tabPage6.Margin = new Padding(3, 4, 3, 4);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(917, 391);
+            tabPage6.Size = new Size(919, 395);
             tabPage6.TabIndex = 2;
             tabPage6.Text = "add customers";
             tabPage6.UseVisualStyleBackColor = true;
@@ -762,7 +760,7 @@
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
-            tableLayoutPanel8.Size = new Size(917, 85);
+            tableLayoutPanel8.Size = new Size(919, 85);
             tableLayoutPanel8.TabIndex = 2;
             // 
             // label20
@@ -804,7 +802,7 @@
             tabSuppliers.Controls.Add(tabControlSupplier);
             tabSuppliers.Location = new Point(4, 29);
             tabSuppliers.Name = "tabSuppliers";
-            tabSuppliers.Padding = new Padding(3, 3, 3, 3);
+            tabSuppliers.Padding = new Padding(3);
             tabSuppliers.Size = new Size(933, 434);
             tabSuppliers.TabIndex = 3;
             tabSuppliers.Text = "Suppliers";
@@ -1036,7 +1034,7 @@
             tabPage4.Location = new Point(4, 29);
             tabPage4.Margin = new Padding(3, 4, 3, 4);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(917, 391);
+            tabPage4.Size = new Size(919, 395);
             tabPage4.TabIndex = 2;
             tabPage4.Text = "view & add suppliers";
             tabPage4.UseVisualStyleBackColor = true;
@@ -1057,7 +1055,7 @@
             tableLayoutPanel5.RowCount = 2;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 13.2275133F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 86.7724838F));
-            tableLayoutPanel5.Size = new Size(917, 346);
+            tableLayoutPanel5.Size = new Size(919, 350);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // label11
@@ -1072,7 +1070,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(202, 0);
+            label12.Location = new Point(203, 0);
             label12.Name = "label12";
             label12.Size = new Size(103, 20);
             label12.TabIndex = 1;
@@ -1081,7 +1079,7 @@
             // labelSupplierViewName
             // 
             labelSupplierViewName.AutoSize = true;
-            labelSupplierViewName.Location = new Point(3, 45);
+            labelSupplierViewName.Location = new Point(3, 46);
             labelSupplierViewName.Name = "labelSupplierViewName";
             labelSupplierViewName.Size = new Size(36, 20);
             labelSupplierViewName.TabIndex = 2;
@@ -1090,7 +1088,7 @@
             // labelSupplierViewStock
             // 
             labelSupplierViewStock.AutoSize = true;
-            labelSupplierViewStock.Location = new Point(202, 45);
+            labelSupplierViewStock.Location = new Point(203, 46);
             labelSupplierViewStock.Name = "labelSupplierViewStock";
             labelSupplierViewStock.Size = new Size(36, 20);
             labelSupplierViewStock.TabIndex = 3;
@@ -1111,7 +1109,7 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(917, 45);
+            tableLayoutPanel4.Size = new Size(919, 45);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // label9
@@ -1130,13 +1128,13 @@
             textboxSupplierAdd.Location = new Point(139, 4);
             textboxSupplierAdd.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierAdd.Name = "textboxSupplierAdd";
-            textboxSupplierAdd.Size = new Size(622, 27);
+            textboxSupplierAdd.Size = new Size(624, 27);
             textboxSupplierAdd.TabIndex = 1;
             // 
             // buttonSupplierAdd
             // 
             buttonSupplierAdd.Dock = DockStyle.Fill;
-            buttonSupplierAdd.Location = new Point(767, 4);
+            buttonSupplierAdd.Location = new Point(769, 4);
             buttonSupplierAdd.Margin = new Padding(3, 4, 3, 4);
             buttonSupplierAdd.Name = "buttonSupplierAdd";
             buttonSupplierAdd.Size = new Size(147, 37);
@@ -1151,7 +1149,7 @@
             Storage.Controls.Add(tableLayoutPanel1);
             Storage.Location = new Point(4, 29);
             Storage.Name = "Storage";
-            Storage.Padding = new Padding(3, 3, 3, 3);
+            Storage.Padding = new Padding(3);
             Storage.Size = new Size(933, 434);
             Storage.TabIndex = 4;
             Storage.Text = "Storage";
@@ -1190,9 +1188,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(532, 0);
             label5.Name = "label5";
-            label5.Size = new Size(139, 20);
+            label5.Size = new Size(129, 20);
             label5.TabIndex = 0;
-            label5.Text = "[unique properties]:";
+            label5.Text = "unique properties:";
             // 
             // label6
             // 
@@ -1332,7 +1330,7 @@
             tabAdd.Controls.Add(tableLayoutPanel3);
             tabAdd.Location = new Point(4, 29);
             tabAdd.Name = "tabAdd";
-            tabAdd.Padding = new Padding(3, 3, 3, 3);
+            tabAdd.Padding = new Padding(3);
             tabAdd.Size = new Size(933, 434);
             tabAdd.TabIndex = 5;
             tabAdd.Text = "Add new items";
@@ -1403,15 +1401,12 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19.0366974F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80.9633F));
             tableLayoutPanel3.Controls.Add(label3, 0, 0);
-            tableLayoutPanel3.Controls.Add(label10, 0, 1);
             tableLayoutPanel3.Controls.Add(comboboxAddType, 1, 0);
-            tableLayoutPanel3.Controls.Add(comboboxAddExtra, 1, 1);
             tableLayoutPanel3.Dock = DockStyle.Top;
             tableLayoutPanel3.Location = new Point(3, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 57.1428566F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
             tableLayoutPanel3.Size = new Size(927, 97);
             tableLayoutPanel3.TabIndex = 2;
@@ -1422,19 +1417,9 @@
             label3.Dock = DockStyle.Fill;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(170, 45);
+            label3.Size = new Size(170, 97);
             label3.TabIndex = 2;
             label3.Text = "Type of item:";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Dock = DockStyle.Fill;
-            label10.Location = new Point(3, 45);
-            label10.Name = "label10";
-            label10.Size = new Size(170, 52);
-            label10.TabIndex = 4;
-            label10.Text = "[Disabled]";
             // 
             // comboboxAddType
             // 
@@ -1448,20 +1433,6 @@
             comboboxAddType.Size = new Size(745, 28);
             comboboxAddType.TabIndex = 7;
             comboboxAddType.SelectedIndexChanged += comboboxAddType_SelectedIndexChanged;
-            // 
-            // comboboxAddExtra
-            // 
-            comboboxAddExtra.Dock = DockStyle.Fill;
-            comboboxAddExtra.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboboxAddExtra.Enabled = false;
-            comboboxAddExtra.FormattingEnabled = true;
-            comboboxAddExtra.Items.AddRange(new object[] { "Name", "Stock", "Price" });
-            comboboxAddExtra.Location = new Point(179, 49);
-            comboboxAddExtra.Margin = new Padding(3, 4, 3, 4);
-            comboboxAddExtra.Name = "comboboxAddExtra";
-            comboboxAddExtra.Size = new Size(745, 28);
-            comboboxAddExtra.TabIndex = 8;
-            comboboxAddExtra.SelectedIndexChanged += comboboxAddExtra_SelectedIndexChanged;
             // 
             // tableLayoutPanel2
             // 
@@ -1707,9 +1678,7 @@
         private ComboBox comboboxStorageSort;
         private TableLayoutPanel tableLayoutPanel3;
         private Label label3;
-        private Label label10;
         private ComboBox comboboxAddType;
-        private ComboBox comboboxAddExtra;
         private GroupBox groupBox1;
         private Label labelAddDetails;
         private GroupBox groupBox2;

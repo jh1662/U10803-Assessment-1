@@ -9,7 +9,7 @@ public class SupplyLines { //* dependent
 }
 #endregion
 #region independent classes
-public class Supplier { //* independent
+public struct Supplier { //* independent
     private string name;
     private Dictionary<string, int> stockDict = new Dictionary<string, int>();
     public Supplier(string name) { 

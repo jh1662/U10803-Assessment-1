@@ -22,6 +22,9 @@ public class AllCustomers {
         for (int i = 0; i < names.Length; i++) { names[i] = customersObjs[i].Name; }
         return names;
     }
+    public void addPurchase(string email, Purchase purchase) {
+        accounts[email].addPurchase(purchase);
+    }
 }
 public class Customer {
     private string name;

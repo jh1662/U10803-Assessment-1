@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace U10803___Assessment_1 {
     public partial class AccessoryForm : Form {
-        private string input;
+        private string input = "";
         public AccessoryForm(int assessoryType) {
             InitializeComponent();
             switch (assessoryType) {

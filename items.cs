@@ -1,7 +1,8 @@
 ﻿using System.Transactions;
 
 public class StockSystem {
-    public Dictionary<string,Item> items = new Dictionary<string,Item>();
+    private Dictionary<string,Item> items = new Dictionary<string,Item>();
+    public Dictionary<string, Item> Items { get { return items; } }
 
     public bool newItem(string name, Item itemObject) {
         if (items.ContainsKey(name)) { return false; }
@@ -25,6 +26,11 @@ public class StockSystem {
         items[item.name] = item;
         return true;
     }
+    public bool check(string name) {
+        if (!items.ContainsKey(name)) { return false; }
+        return true;
+    }
+
 }
 
 //------------------------------------------------------------------------------------------------------------------------------

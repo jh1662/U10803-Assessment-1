@@ -546,12 +546,12 @@ public partial class Form1 : Form {
             return;
         }
 
-        purchases = allCustomers.viewCustomer(email).purchases.ToArray();
+        purchases = allCustomers.viewCustomer(email).Purchases.ToArray();
         if (purchases.Length == 0) { return; }
         foreach (Purchase purchase in purchases) {
-            labelCustomerViewPurchaseDate.Text += (purchase.saleDate + "\n");
-            labelCustomerViewPurchaseItems.Text += purchasedItemsToString(purchase.items);
-            labelCustomerViewPurchaseCost.Text += (purchase.price + "\n");
+            labelCustomerViewPurchaseDate.Text += (purchase.SaleDate + "\n");
+            labelCustomerViewPurchaseItems.Text += purchasedItemsToString(purchase.Items);
+            labelCustomerViewPurchaseCost.Text += (purchase.Price + "\n");
         }
     }
 

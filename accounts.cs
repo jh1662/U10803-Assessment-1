@@ -1,56 +1,60 @@
 ﻿#region dependent classes
 using System.Web;
+using System.Xml.Linq;
 
 public class AllCustomers {
-    private Dictionary<string, Customer> accounts = new Dictionary<string,Customer>();
+    public AllCustomers() {
+
+        Accounts = new Dictionary<string, Customer>();
+    }
+    public Dictionary<string, Customer> Accounts { get; }
     public bool findEmail(string email) {
-        if (accounts.ContainsKey(email)) { return true; }; 
+        if (Accounts.ContainsKey(email)) { return true; }; 
         return false;
     }
     public void addCustomer(string email, string name) {
-        accounts.Add(email, new Customer(name, email));
+        Accounts.Add(email, new Customer(name, email));
     }
     public Customer viewCustomer(string email) {
-        return accounts[email];
+        return Accounts[email];
     }
     public string[] viewAllEmails() {
-        return accounts.Keys.ToArray();
+        return Accounts.Keys.ToArray();
     }
     public string[] viewAllNames() {
-        string[] names = new string[accounts.Count];
-        Customer[] customersObjs = accounts.Values.ToArray();
+        string[] names = new string[Accounts.Count];
+        Customer[] customersObjs = Accounts.Values.ToArray();
         for (int i = 0; i < names.Length; i++) { names[i] = customersObjs[i].Name; }
         return names;
     }
     public void addPurchase(string email, Purchase purchase) {
-        accounts[email].addPurchase(purchase);
+        Accounts[email].addPurchase(purchase);
     }
 }
-public class Customer {
-    private string name;
-    private string email;
-    public List<Purchase> purchases = new List<Purchase>();
+public struct Customer {
     public Customer(string name, string email) {
-        this.name = name;
-        this.email = email;
-    }
-    public string Name { get { return name; } }
-    public string Email { get { return email; } }
-    public void addPurchase (Purchase purchase) {
+        Name = name;
+        Email = email;
 
-        purchases.Add(purchase);
+        Purchases = new List<Purchase>();
+    }
+    public string Name { get; }
+    public string Email { get; }
+    public List<Purchase> Purchases { get; }
+    public void addPurchase (Purchase purchase) {
+        Purchases.Add(purchase);
     }
 }
 #endregion
 #region independent classes
-public class Purchase {
-    public DateTime saleDate;
-    public decimal price;
-    public Dictionary<string, int> items = new Dictionary<string, int>();
-    public Purchase(DateTime saleDate, decimal price, Dictionary<string, int> items) { 
-        this.saleDate = saleDate;
-        this.price = price;
-        this.items = items;
+public struct Purchase {
+    public Purchase(DateTime saleDate, decimal price, Dictionary<string, int> items) {
+        SaleDate = saleDate;
+        Price = price;
+        Items = items;
     }
+    public DateTime SaleDate { get; }
+    public decimal Price { get; }
+    public Dictionary<string, int> Items { get; }
 }
 #endregion

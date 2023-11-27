@@ -1,33 +1,38 @@
 ﻿#region dependent classes
 public class SupplyLines { //* dependent
-    public Dictionary<string, Supplier> SupplierDict = new Dictionary<string, Supplier>();
+
+    public SupplyLines() {
+        SupplierDict = new Dictionary<string, Supplier>();
+    }
+    public Dictionary<string, Supplier> SupplierDict { get; }
     public Boolean Add(string name) {
         if (SupplierDict.ContainsKey(name)) {  return false; }
-        SupplierDict[name] = new Supplier(name);
+        SupplierDict[name] = new Supplier();
         return true;
     }
+
 }
 #endregion
 #region independent classes
 public struct Supplier { //* independent
-    private string name;
-    private Dictionary<string, int> stockDict = new Dictionary<string, int>();
-    public Supplier(string name) { 
-        this.name = name;
+    public Supplier() {
+
+        StockDict = new Dictionary<string, int>();
     }
-    public Dictionary<string, int> StockDict { get { return stockDict; } }
+    public Dictionary<string, int> StockDict { get; }
     public void order(string itemName, int qty) {
-        if (!stockDict.ContainsKey(itemName)) {
-            stockDict[itemName] = qty;
+        
+        if (!StockDict.ContainsKey(itemName)) {
+            StockDict[itemName] = qty;
             return;
         }
-        stockDict[itemName] += qty;
+        StockDict[itemName] += qty;
     }
     public bool restock(string itemName, int qty) {
 
-        if (!stockDict.ContainsKey(itemName)) { return false; }
-        if ((stockDict[itemName] - qty) < 0) { return false; }
-        stockDict[itemName] -= qty;
+        if (!StockDict.ContainsKey(itemName)) { return false; }
+        if ((StockDict[itemName] - qty) < 0) { return false; }
+        StockDict[itemName] -= qty;
         return true;
     }
 }

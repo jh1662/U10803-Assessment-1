@@ -313,7 +313,7 @@
             tableLayoutPanel17.RowCount = 2;
             tableLayoutPanel17.RowStyles.Add(new RowStyle(SizeType.Percent, 12.2171946F));
             tableLayoutPanel17.RowStyles.Add(new RowStyle(SizeType.Percent, 87.78281F));
-            tableLayoutPanel17.Size = new Size(363, 295);
+            tableLayoutPanel17.Size = new Size(363, 303);
             tableLayoutPanel17.TabIndex = 5;
             // 
             // label33
@@ -346,7 +346,7 @@
             // labelCheckoutItems
             // 
             labelCheckoutItems.AutoSize = true;
-            labelCheckoutItems.Location = new Point(3, 36);
+            labelCheckoutItems.Location = new Point(3, 37);
             labelCheckoutItems.Name = "labelCheckoutItems";
             labelCheckoutItems.Size = new Size(36, 20);
             labelCheckoutItems.TabIndex = 3;
@@ -355,7 +355,7 @@
             // labelCheckoutQtys
             // 
             labelCheckoutQtys.AutoSize = true;
-            labelCheckoutQtys.Location = new Point(133, 36);
+            labelCheckoutQtys.Location = new Point(133, 37);
             labelCheckoutQtys.Name = "labelCheckoutQtys";
             labelCheckoutQtys.Size = new Size(36, 20);
             labelCheckoutQtys.TabIndex = 4;
@@ -364,7 +364,7 @@
             // labelCheckoutPrices
             // 
             labelCheckoutPrices.AutoSize = true;
-            labelCheckoutPrices.Location = new Point(240, 36);
+            labelCheckoutPrices.Location = new Point(240, 37);
             labelCheckoutPrices.Name = "labelCheckoutPrices";
             labelCheckoutPrices.Size = new Size(36, 20);
             labelCheckoutPrices.TabIndex = 5;
@@ -837,8 +837,8 @@
             // 
             groupBox4.Controls.Add(tableLayoutPanel7);
             groupBox4.Controls.Add(ButtonSupplierOrder);
-            groupBox4.Dock = DockStyle.Bottom;
-            groupBox4.Location = new Point(3, 200);
+            groupBox4.Dock = DockStyle.Top;
+            groupBox4.Location = new Point(3, 195);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(913, 191);
             groupBox4.TabIndex = 6;
@@ -897,26 +897,29 @@
             // 
             // textboxSupplierOrderSupplier
             // 
+            textboxSupplierOrderSupplier.Dock = DockStyle.Fill;
             textboxSupplierOrderSupplier.Location = new Point(165, 4);
             textboxSupplierOrderSupplier.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierOrderSupplier.Name = "textboxSupplierOrderSupplier";
-            textboxSupplierOrderSupplier.Size = new Size(489, 27);
+            textboxSupplierOrderSupplier.Size = new Size(739, 27);
             textboxSupplierOrderSupplier.TabIndex = 1;
             // 
             // textboxSupplierOrderItem
             // 
+            textboxSupplierOrderItem.Dock = DockStyle.Fill;
             textboxSupplierOrderItem.Location = new Point(165, 47);
             textboxSupplierOrderItem.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierOrderItem.Name = "textboxSupplierOrderItem";
-            textboxSupplierOrderItem.Size = new Size(489, 27);
+            textboxSupplierOrderItem.Size = new Size(739, 27);
             textboxSupplierOrderItem.TabIndex = 4;
             // 
             // textboxSupplierOrderQty
             // 
+            textboxSupplierOrderQty.Dock = DockStyle.Fill;
             textboxSupplierOrderQty.Location = new Point(165, 92);
             textboxSupplierOrderQty.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierOrderQty.Name = "textboxSupplierOrderQty";
-            textboxSupplierOrderQty.Size = new Size(489, 27);
+            textboxSupplierOrderQty.Size = new Size(739, 27);
             textboxSupplierOrderQty.TabIndex = 6;
             // 
             // ButtonSupplierOrder
@@ -994,26 +997,29 @@
             // 
             // textboxSupplierRestockSupplier
             // 
+            textboxSupplierRestockSupplier.Dock = DockStyle.Fill;
             textboxSupplierRestockSupplier.Location = new Point(165, 4);
             textboxSupplierRestockSupplier.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierRestockSupplier.Name = "textboxSupplierRestockSupplier";
-            textboxSupplierRestockSupplier.Size = new Size(489, 27);
+            textboxSupplierRestockSupplier.Size = new Size(739, 27);
             textboxSupplierRestockSupplier.TabIndex = 1;
             // 
             // textboxSupplierRestockItem
             // 
+            textboxSupplierRestockItem.Dock = DockStyle.Fill;
             textboxSupplierRestockItem.Location = new Point(165, 47);
             textboxSupplierRestockItem.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierRestockItem.Name = "textboxSupplierRestockItem";
-            textboxSupplierRestockItem.Size = new Size(489, 27);
+            textboxSupplierRestockItem.Size = new Size(739, 27);
             textboxSupplierRestockItem.TabIndex = 4;
             // 
             // textboxSupplierRestockQty
             // 
+            textboxSupplierRestockQty.Dock = DockStyle.Fill;
             textboxSupplierRestockQty.Location = new Point(165, 92);
             textboxSupplierRestockQty.Margin = new Padding(3, 4, 3, 4);
             textboxSupplierRestockQty.Name = "textboxSupplierRestockQty";
-            textboxSupplierRestockQty.Size = new Size(489, 27);
+            textboxSupplierRestockQty.Size = new Size(739, 27);
             textboxSupplierRestockQty.TabIndex = 6;
             // 
             // ButtonSupplierRestock
@@ -1173,14 +1179,14 @@
             tableStorageItems.Controls.Add(labelStorageListPrice, 1, 1);
             tableStorageItems.Controls.Add(labelStorageListStock, 2, 1);
             tableStorageItems.Controls.Add(labelStorageListUnique, 3, 1);
-            tableStorageItems.Dock = DockStyle.Fill;
+            tableStorageItems.Dock = DockStyle.Top;
             tableStorageItems.Location = new Point(3, 96);
             tableStorageItems.Margin = new Padding(3, 4, 3, 4);
             tableStorageItems.Name = "tableStorageItems";
             tableStorageItems.RowCount = 2;
             tableStorageItems.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableStorageItems.RowStyles.Add(new RowStyle(SizeType.Absolute, 285F));
-            tableStorageItems.Size = new Size(927, 335);
+            tableStorageItems.Size = new Size(927, 305);
             tableStorageItems.TabIndex = 4;
             // 
             // label5
@@ -1223,7 +1229,7 @@
             // 
             labelStorageListName.AutoSize = true;
             labelStorageListName.Dock = DockStyle.Fill;
-            labelStorageListName.Location = new Point(3, 50);
+            labelStorageListName.Location = new Point(3, 20);
             labelStorageListName.Name = "labelStorageListName";
             labelStorageListName.Size = new Size(238, 285);
             labelStorageListName.TabIndex = 4;
@@ -1233,7 +1239,7 @@
             // 
             labelStorageListPrice.AutoSize = true;
             labelStorageListPrice.Dock = DockStyle.Fill;
-            labelStorageListPrice.Location = new Point(247, 50);
+            labelStorageListPrice.Location = new Point(247, 20);
             labelStorageListPrice.Name = "labelStorageListPrice";
             labelStorageListPrice.Size = new Size(157, 285);
             labelStorageListPrice.TabIndex = 5;
@@ -1243,7 +1249,7 @@
             // 
             labelStorageListStock.AutoSize = true;
             labelStorageListStock.Dock = DockStyle.Fill;
-            labelStorageListStock.Location = new Point(410, 50);
+            labelStorageListStock.Location = new Point(410, 20);
             labelStorageListStock.Name = "labelStorageListStock";
             labelStorageListStock.Size = new Size(116, 285);
             labelStorageListStock.TabIndex = 6;
@@ -1253,7 +1259,7 @@
             // 
             labelStorageListUnique.AutoSize = true;
             labelStorageListUnique.Dock = DockStyle.Fill;
-            labelStorageListUnique.Location = new Point(532, 50);
+            labelStorageListUnique.Location = new Point(532, 20);
             labelStorageListUnique.Name = "labelStorageListUnique";
             labelStorageListUnique.Size = new Size(392, 285);
             labelStorageListUnique.TabIndex = 7;
@@ -1341,11 +1347,11 @@
             groupBox2.Controls.Add(groupBox1);
             groupBox2.Controls.Add(buttonAddSubmit);
             groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Location = new Point(3, 100);
+            groupBox2.Location = new Point(3, 51);
             groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(927, 331);
+            groupBox2.Size = new Size(927, 380);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             // 
@@ -1353,7 +1359,7 @@
             // 
             groupBox1.Controls.Add(textboxAddDetails);
             groupBox1.Controls.Add(labelAddDetails);
-            groupBox1.Dock = DockStyle.Fill;
+            groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(3, 24);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
@@ -1365,8 +1371,8 @@
             // 
             // textboxAddDetails
             // 
-            textboxAddDetails.Dock = DockStyle.Bottom;
-            textboxAddDetails.Location = new Point(3, 53);
+            textboxAddDetails.Dock = DockStyle.Fill;
+            textboxAddDetails.Location = new Point(3, 44);
             textboxAddDetails.Margin = new Padding(3, 4, 3, 4);
             textboxAddDetails.Name = "textboxAddDetails";
             textboxAddDetails.Size = new Size(915, 27);
@@ -1386,10 +1392,10 @@
             // buttonAddSubmit
             // 
             buttonAddSubmit.Dock = DockStyle.Bottom;
-            buttonAddSubmit.Location = new Point(3, 108);
+            buttonAddSubmit.Location = new Point(3, 116);
             buttonAddSubmit.Margin = new Padding(3, 4, 3, 4);
             buttonAddSubmit.Name = "buttonAddSubmit";
-            buttonAddSubmit.Size = new Size(921, 219);
+            buttonAddSubmit.Size = new Size(921, 260);
             buttonAddSubmit.TabIndex = 4;
             buttonAddSubmit.Text = "submit";
             buttonAddSubmit.UseVisualStyleBackColor = true;
@@ -1408,16 +1414,16 @@
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 57.1428566F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
-            tableLayoutPanel3.Size = new Size(927, 97);
+            tableLayoutPanel3.Size = new Size(927, 48);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Dock = DockStyle.Fill;
+            label3.Dock = DockStyle.Top;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(170, 97);
+            label3.Size = new Size(170, 20);
             label3.TabIndex = 2;
             label3.Text = "Type of item:";
             // 

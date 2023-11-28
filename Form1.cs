@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Xml.Linq;
 
 namespace U10803___Assessment_1;
+
 public partial class Form1 : Form {
     //: instansiatating own
     StockSystem stockSystem = new StockSystem();
@@ -11,6 +12,8 @@ public partial class Form1 : Form {
     AllCustomers allCustomers = new AllCustomers();
 
     int numberOfDetails;
+
+    public enum ItemType { Shoe, Clothing, Accessory }
 
     public Dictionary<string, int> shoppingCart = new Dictionary<string, int>();
     public Form1() {
@@ -31,15 +34,16 @@ public partial class Form1 : Form {
     #endregion
 
     #region tab - Storage
-    public bool isBigger(Item item1, Item item2, int toCompare) {
-        switch (toCompare) {
-            case 1:
+    public enum Compare { Price, Stock, Name }
+    public bool isBigger(Item item1, Item item2, Compare compare) {
+        switch (compare) {
+            case Compare.Price:
                 if (item1.price > item2.price) { return true; }
                 return false;
-            case 2:
+            case Compare.Stock:
                 if (item1.stock > item2.stock) { return true; }
                 return false;
-            default:
+            default: //< if 'compare' = 'Compare.Name' 
                 int length;
                 if (item1.name.Length < item2.name.Length) { length = item1.name.Length; }
                 else { length = item2.name.Length; }
@@ -50,14 +54,14 @@ public partial class Form1 : Form {
                 return false;
         }
     }
-    public Item[] bubbleSort(Item[] itemArr, int toCompare) {
+    public Item[] bubbleSort(Item[] itemArr, Compare compare) {
         int len = itemArr.Length;
         Item temp;
         bool inactiveLoop;
         for (int index1 = 0; index1 < len - 1; index1++) {
             inactiveLoop = true;
             for (int index2 = 0; index2 < len - 1; index2++) {
-                if (isBigger(itemArr[index2], itemArr[index2 + 1], toCompare)) {
+                if (isBigger(itemArr[index2], itemArr[index2 + 1], compare)) {
                     inactiveLoop = false;
                     temp = itemArr[index2];
                     itemArr[index2] = itemArr[index2 + 1];
@@ -81,8 +85,10 @@ public partial class Form1 : Form {
     }
 
     private void UIStorageUpdate() {
-        int type = comboboxStorageType.SelectedIndex;
-        int sort = comboboxStorageSort.SelectedIndex;
+        //int type = comboboxStorageType.SelectedIndex;
+        ItemType itemType = (ItemType)comboboxStorageType.SelectedIndex;
+        //int sort = comboboxStorageSort.SelectedIndex;
+        Compare sort = (Compare)comboboxStorageSort.SelectedIndex;
         List<Item> itemList = new List<Item>();
         Item[] itemArr;
         //Type classType;
@@ -104,14 +110,14 @@ public partial class Form1 : Form {
         }
         */
         foreach (Item item in stockSystem.Items.Values) {
-            switch (type) {
-                case 0:
+            switch (itemType) {
+                case ItemType.Shoe:
                     if (item is Shoe) { itemList.Add(item); }
                     break;
-                case 1:
+                case ItemType.Clothing:
                     if (item is Clothing) { itemList.Add(item); }
                     break;
-                default:
+                default: //< if 'itemType' is 'ItemType.Accessory'
                     if (item is Accessory) { itemList.Add(item); }
                     break;
             }
@@ -163,6 +169,7 @@ public partial class Form1 : Form {
     #endregion
 
     #region tab - Add
+    public enum AccessoryType { Watch, Bag, Drink}
     public bool tryBool(string input, out bool result) {
         result = false;
         switch (input) {
@@ -203,8 +210,10 @@ public partial class Form1 : Form {
         string name;
         int stock;
         decimal price;
+        ItemType itemType;
 
-        if (comboboxAddType.SelectedIndex == null) { MessageBox.Show("You didn't select anything in all availible comboboxes", "ERROR"); }
+        if (comboboxAddType.SelectedIndex == -1) { MessageBox.Show("You didn't select anything the combobox", "ERROR"); }
+        itemType = (ItemType)comboboxAddType.SelectedIndex;
 
         //: critical verification
         if (saperatedInputs.Length == 0) {
@@ -216,8 +225,8 @@ public partial class Form1 : Form {
         name = saperatedInputs[0];
         groupVerification.Add(int.TryParse(saperatedInputs[1], out stock));
         groupVerification.Add(decimal.TryParse(saperatedInputs[2], out price));
-        switch (comboboxAddType.SelectedIndex) {
-            case 0:
+        switch (itemType) {
+            case ItemType.Shoe:
                 groupVerification.Add(decimal.TryParse(saperatedInputs[3], out decimal shoeSize));
                 string shoeType = saperatedInputs[4];
                 if (groupVerification.Contains(false)) {
@@ -231,7 +240,7 @@ public partial class Form1 : Form {
                 }
                 MessageBox.Show("Item creation successful", "successful action");
                 break;
-            case 1:
+            case ItemType.Clothing:
                 groupVerification.Add(int.TryParse(saperatedInputs[3], out int clothingSize));
                 string clothingType = saperatedInputs[4];
                 string style = saperatedInputs[5];
@@ -246,7 +255,7 @@ public partial class Form1 : Form {
                 }
                 MessageBox.Show("Item creation successful", "successful action");
                 break;
-            default:
+            default: //< if item is acessory ('ItemType.Accessory')
                 if (groupVerification.Contains(false)) {
                     MessageBox.Show("atleast one of the properites in the detail entry was in the wrong format", "ERROR");
                     break;

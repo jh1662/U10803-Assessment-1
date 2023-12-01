@@ -1,6 +1,6 @@
 ﻿using System.Transactions;
-
-public class StockSystem {
+#region dependent classes
+public class StockSystem { //* dependet on 'Item' abstract class (polymorphism)
     private Dictionary<string,Item> items = new Dictionary<string,Item>();
     public Dictionary<string, Item> Items { get { return items; } }
 
@@ -32,10 +32,8 @@ public class StockSystem {
     }
 
 }
-
-//------------------------------------------------------------------------------------------------------------------------------
-//# classes that doesn't call non-system objects
-
+#endregion
+#region independent classes
 public abstract class Item {
     public string name;
     public decimal price;
@@ -132,4 +130,5 @@ public class Drink : Accessory {
         return $"capacity - {this.capacity}, type - {this.type}";
     }
 }
+#endregion
 #endregion

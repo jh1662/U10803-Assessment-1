@@ -1,60 +1,84 @@
-﻿#region dependent classes
-using System.Web;
+﻿using System.Web;
 using System.Xml.Linq;
+#region dependent classes
+public class AllCustomers { //* dependent on 'Customer' struct class
+    #region intialiser
 
-public class AllCustomers {
     public AllCustomers() {
-
         Accounts = new Dictionary<string, Customer>();
     }
     public Dictionary<string, Customer> Accounts { get; }
-    public bool findEmail(string email) {
+    #endregion
+    #region methods
+    public bool findEmail(string email) { //* validator
+
         if (Accounts.ContainsKey(email)) { return true; }; 
         return false;
     }
-    public void addCustomer(string email, string name) {
+    public void addCustomer(string email, string name) { //* mutator
+
         Accounts.Add(email, new Customer(name, email));
     }
-    public Customer viewCustomer(string email) {
+    public Customer viewCustomer(string email) { //* accessor
+
         return Accounts[email];
     }
-    public string[] viewAllEmails() {
+    public string[] viewAllEmails() { //* accessor
+
         return Accounts.Keys.ToArray();
     }
-    public string[] viewAllNames() {
+    public string[] viewAllNames() { //* accessor
         string[] names = new string[Accounts.Count];
         Customer[] customersObjs = Accounts.Values.ToArray();
+        //^ get customers to see thier names
+
         for (int i = 0; i < names.Length; i++) { names[i] = customersObjs[i].Name; }
+        //^ stores all wanted strings into an array
         return names;
     }
-    public void addPurchase(string email, Purchase purchase) {
+    public void addPurchase(string email, Purchase purchase) { //* mutator
+
         Accounts[email].addPurchase(purchase);
     }
+    #endregion
 }
-public struct Customer {
+public struct Customer { //* dependent on 'Purchase' struct class
+    #region initialiser
+
     public Customer(string name, string email) {
         Name = name;
         Email = email;
-
         Purchases = new List<Purchase>();
     }
     public string Name { get; }
+    //^ to be accessed by 'AllCustomers' class
     public string Email { get; }
+    //^ to be accessed by 'AllCustomers' class
     public List<Purchase> Purchases { get; }
-    public void addPurchase (Purchase purchase) {
+    //^ to be accessed by 'Form1.cs'
+    #endregion
+    #region methods
+    public void addPurchase (Purchase purchase) { //* mutator
         Purchases.Add(purchase);
     }
+    #endregion
 }
 #endregion
 #region independent classes
-public struct Purchase {
+public struct Purchase { //* dependent, no methods
+    #region initialisers
+
     public Purchase(DateTime saleDate, decimal price, Dictionary<string, int> items) {
         SaleDate = saleDate;
         Price = price;
         Items = items;
     }
     public DateTime SaleDate { get; }
+    //^ to be accessed by 'Form1.cs'
     public decimal Price { get; }
+    //^ to be accessed by 'Form1.cs'
     public Dictionary<string, int> Items { get; }
+    //^ to be accessed by 'Form1.cs'
+    #endregion
 }
 #endregion

@@ -6,6 +6,7 @@ using System.Xml.Linq;
 namespace U10803___Assessment_1;
 
 public partial class Form1 : Form {
+    #region initialisers
     //: instansiatating own
     StockSystem stockSystem = new StockSystem();
     SupplyLines supplyLines = new SupplyLines();
@@ -19,7 +20,8 @@ public partial class Form1 : Form {
     public Form1() {
         InitializeComponent();
     }
-    #region redundant (but deletion means GUI breaking)
+    #endregion
+    #region redundant (but deletion means GUI designer breaking)
     private void comboboxType_SelectedIndexChanged(object sender, EventArgs e) {
 
     }
@@ -31,25 +33,34 @@ public partial class Form1 : Form {
     private void button2_Click(object sender, EventArgs e) {
 
     }
+
+    private void comboboxStorageExtrafilter_SelectedIndexChanged(object sender, EventArgs e) {
+
+    }
+    private void comboboxAddExtra_SelectedIndexChanged(object sender, EventArgs e) {
+
+    }
     #endregion
 
     #region tab - Storage
     public enum Compare { Price, Stock, Name }
     public bool isBigger(Item item1, Item item2, Compare compare) {
+
+        //: different ways of comparison - dependent on data type
         switch (compare) {
             case Compare.Price:
-                if (item1.price > item2.price) { return true; }
+                if (item1.Price > item2.Price) { return true; }
                 return false;
             case Compare.Stock:
-                if (item1.stock > item2.stock) { return true; }
+                if (item1.Stock > item2.Stock) { return true; }
                 return false;
             default: //< if 'compare' = 'Compare.Name' 
                 int length;
-                if (item1.name.Length < item2.name.Length) { length = item1.name.Length; }
-                else { length = item2.name.Length; }
-                for (int i = 0; i < item1.name.Length; i++) {
-                    if (item1.name[i] > item2.name[i]) { return true; }
-                    if (item1.name[i] < item2.name[i]) { return false; }
+                if (item1.Name.Length < item2.Name.Length) { length = item1.Name.Length; }
+                else { length = item2.Name.Length; }
+                for (int i = 0; i < item1.Name.Length; i++) {
+                    if (item1.Name[i] > item2.Name[i]) { return true; }
+                    if (item1.Name[i] < item2.Name[i]) { return false; }
                 }
                 return false;
         }
@@ -58,6 +69,7 @@ public partial class Form1 : Form {
         int len = itemArr.Length;
         Item temp;
         bool inactiveLoop;
+
         for (int index1 = 0; index1 < len - 1; index1++) {
             inactiveLoop = true;
             for (int index2 = 0; index2 < len - 1; index2++) {
@@ -73,14 +85,13 @@ public partial class Form1 : Form {
         return itemArr;
     }
     private void comboboxStorageType_SelectedIndexChanged(object sender, EventArgs e) {
+
         //! 0 - Shoe, 1 - Clothing, 2 - Accessory
         UIStorageUpdate();
     }
     private void comboboxStorageSort_SelectedIndexChanged(object sender, EventArgs e) {
+
         //! 0 - Name, 1 - Stock, 2 - Price
-        UIStorageUpdate();
-    }
-    private void comboboxStorageExtrafilter_SelectedIndexChanged(object sender, EventArgs e) {
         UIStorageUpdate();
     }
 
@@ -109,6 +120,8 @@ public partial class Form1 : Form {
             }
         }
         */
+
+        //: The filtering part
         foreach (Item item in stockSystem.Items.Values) {
             switch (itemType) {
                 case ItemType.Shoe:
@@ -121,8 +134,8 @@ public partial class Form1 : Form {
                     if (item is Accessory) { itemList.Add(item); }
                     break;
             }
-
         }
+
         itemArr = itemList.ToArray();
         itemArr = bubbleSort(itemArr, sort);
 
@@ -134,12 +147,13 @@ public partial class Form1 : Form {
         labelStorageListUnique.Text = "";
 
         //int labelsBufferPointer = 0;
-        for (int i = 0; i < itemArr.Length; i++) {
-            labelStorageListName.Text += itemArr[i].name + "\n\n";
-            labelStorageListPrice.Text += itemArr[i].price + "\n\n";
-            labelStorageListStock.Text += itemArr[i].stock + "\n\n";
-            labelStorageListUnique.Text += itemArr[i].giveUniqueDetails() + "\n\n";
 
+        //: displaying info to user
+        for (int i = 0; i < itemArr.Length; i++) {
+            labelStorageListName.Text += itemArr[i].Name + "\n\n";
+            labelStorageListPrice.Text += itemArr[i].Price + "\n\n";
+            labelStorageListStock.Text += itemArr[i].Stock + "\n\n";
+            labelStorageListUnique.Text += itemArr[i].giveUniqueDetails() + "\n\n";
             /*
             tableStorageItems.RowCount++;
 
@@ -169,9 +183,12 @@ public partial class Form1 : Form {
     #endregion
 
     #region tab - Add
-    public enum AccessoryType { Watch, Bag, Drink}
+    public enum AccessoryType { Watch, Bag, Drink }
+
     public bool tryBool(string input, out bool result) {
+        //* convert user's input to a boolean
         result = false;
+
         switch (input) {
             case "Y":
                 result = true;
@@ -183,6 +200,7 @@ public partial class Form1 : Form {
         }
     }
     public string[] verifyDetailsInput(string input, int count) {
+        //* converts user's singular input to a string array
         string[] verified;
         int counts = 0;
 
@@ -206,6 +224,7 @@ public partial class Form1 : Form {
         return verified;
     }
     private void buttonAddSubmit_Click(object sender, EventArgs e) {
+        //* when user wants to add a new kind of item
         string[] saperatedInputs = verifyDetailsInput(textboxAddDetails.Text, numberOfDetails);
         string name;
         int stock;
@@ -225,6 +244,7 @@ public partial class Form1 : Form {
         name = saperatedInputs[0];
         groupVerification.Add(int.TryParse(saperatedInputs[1], out stock));
         groupVerification.Add(decimal.TryParse(saperatedInputs[2], out price));
+        //: different ways to add item - depending on the type of item
         switch (itemType) {
             case ItemType.Shoe:
                 groupVerification.Add(decimal.TryParse(saperatedInputs[3], out decimal shoeSize));
@@ -268,12 +288,12 @@ public partial class Form1 : Form {
                 }
                 */
                 if (!addAccessory(saperatedInputs[3], name, price, stock)) { break; }
-
                 MessageBox.Show("Item creation successful", "successful action");
                 break;
         }
     }
     private bool addAccessory(string type, string name, decimal price, int stock) {
+        //* determine what type accessory the user wants to add and does it
         type = type.Trim().ToUpper();
         string input;
         AccessoryForm accessoryForm;
@@ -363,6 +383,7 @@ public partial class Form1 : Form {
         //! 0 - Shoe, 1 - Clothing, 2 - Accessory
         const string starting = "Name, Stock, Price,";
         const int startingQty = 3;
+
         switch (comboboxAddType.SelectedIndex) {
             case 0:
                 numberOfDetails = startingQty + 2;
@@ -378,13 +399,12 @@ public partial class Form1 : Form {
                 break;
         }
     }
-    private void comboboxAddExtra_SelectedIndexChanged(object sender, EventArgs e) {
-
-    }
     #endregion
 
     #region tab - Supplier
     private void supplierViewRefresh() {
+
+        //* allows user to see all suppliers, and thier stock, accurently (so they don't add the same supplier and stock twice)
         if (supplyLines.SupplierDict.Count == 0) { return; }
 
         labelSupplierViewName.Text = string.Empty;
@@ -407,6 +427,7 @@ public partial class Form1 : Form {
         }
     }
     private bool verifyInputsSupplier(string supplier, string item, string qty) {
+        //* verify user's input to restock or order to a specified supplier
         int qtyInt;
 
         if (supplier == "" || item == "" || qty == "") {
@@ -431,7 +452,9 @@ public partial class Form1 : Form {
         return true;
     }
     private void buttonSupplierAdd_Click(object sender, EventArgs e) {
+        //* verifies and adds a new supplier
         string input = textboxSupplierAdd.Text.Trim().ToUpper();
+
         if (input == "") {
             MessageBox.Show("can't leave the name blank!", "error");
             return;
@@ -443,6 +466,7 @@ public partial class Form1 : Form {
         supplierViewRefresh();
     }
     private void ButtonSupplierRestock_Click(object sender, EventArgs e) {
+        //* verifies and restock to a specified supplier
         string inputSupplier = textboxSupplierRestockSupplier.Text.Trim().ToUpper();
         string inputItem = textboxSupplierRestockItem.Text.Trim().ToUpper();
         string inputQty = textboxSupplierRestockQty.Text.Trim().ToUpper();
@@ -456,12 +480,14 @@ public partial class Form1 : Form {
             return;
         }
 
-        stockSystem.Items[inputItem].stock += qty;
+        //stockSystem.Items[inputItem].Stock += qty;
+        stockSystem.stock(inputItem, qty);
         supplierViewRefresh();
         UIStorageUpdate();
         MessageBox.Show("restock successful", "info");
     }
     private void ButtonSupplierOrder_Click(object sender, EventArgs e) {
+        //* verifies and order to a specified supplier
         string inputSupplier = textboxSupplierOrderSupplier.Text.Trim().ToUpper();
         string inputItem = textboxSupplierOrderItem.Text.Trim().ToUpper();
         string inputQty = textboxSupplierOrderQty.Text.Trim().ToUpper();
@@ -478,6 +504,7 @@ public partial class Form1 : Form {
 
     #region tab - customer
     private char[] generateValidEmailChars() {
+        //* generates constant data for the the 'verifyEmail' method 
         //* Valid characters (RFC-compliant) source: 
         //* https://www.novell.com/documentation/groupwise18/gwsdk_admin_rest_api/data/b12nem8w.html
         List<char> chars = new List<char>();
@@ -494,12 +521,13 @@ public partial class Form1 : Form {
         return chars.ToArray();
     }
     private bool verifyEmail(string email) {
+        //* verifies if email is both valid and appropiate
         char[] validChars = generateValidEmailChars();
         int atSymbolCount = 0;
 
         if (email == "") { return false; }
         if (email.StartsWith('@') || email.EndsWith('@')) { return false; }
-        //^ I keep char count of each line below 128
+        //^ I keep char count of each code line below 128 <-- I have no idea why I mentioned that here but it's true
         foreach (char c in email) {
             if (c == '@') { atSymbolCount++; continue; }
             if (!validChars.Contains(c)) { return false; }
@@ -512,8 +540,10 @@ public partial class Form1 : Form {
         return true;
     }
     private void buttonCustomerAdd_Click(object sender, EventArgs e) {
+        //* verifies and add a new customer
         string name = textboxCustomerAddName.Text.Trim().ToUpper();
         string email = textboxCustomerAddEmail.Text.Trim().ToUpper();
+
         if (!verifyEmail(email)) {
             MessageBox.Show("invalid email format", "error");
             return;
@@ -532,6 +562,7 @@ public partial class Form1 : Form {
     }
 
     private void refreshRecents() {
+        //* refresh the display of all customers - to prevent user attempting to add the same customer again
         string[] emails = allCustomers.viewAllEmails();
         string[] names = allCustomers.viewAllNames();
 
@@ -543,6 +574,7 @@ public partial class Form1 : Form {
         }
     }
     private void buttonCustomerViewInspect_Click(object sender, EventArgs e) {
+        //* validates and show specified customer's purchase history
         string email = textboxCustomerView.Text.Trim().ToUpper();
         Purchase[] purchases;
 
@@ -565,12 +597,14 @@ public partial class Form1 : Form {
     }
 
     private string purchasedItemsToString(Dictionary<string, int> purchased) {
+        //* convert dictionary to an informative string for display
         string purchases = "";
         string[] names = purchased.Keys.ToArray();
         /*
         string[] qtys = Array.ConvertAll(purchased.Values.ToArray(),x=>x.ToString());
         //^ https://stackoverflow.com/questions/14051257/conversion-from-int-array-to-string-array
         */
+
         int[] qtys = purchased.Values.ToArray();
         for (int i = 0; i < names.Length; i++) {
             purchases += names[i] + $" ({qtys[i]})";
@@ -582,6 +616,7 @@ public partial class Form1 : Form {
 
     #region tab - checkout
     private bool inspectEmail() {
+        //* check if a customer (by inputted email) exists
         string email = textboxCheckoutEmail.Text.Trim().ToUpper();
         if (allCustomers.findEmail(email)) {
             MessageBox.Show("customer (by email) is confirmed to exist", "check successful");
@@ -591,9 +626,12 @@ public partial class Form1 : Form {
         return false;
     }
     private void buttonCheckoutInspect_Click(object sender, EventArgs e) {
+        //* redirects to method
         inspectEmail();
     }
     private decimal refresh() {
+        //* displays current items in shopping cart so the user won't do the same intension twice
+        //* (responsiveness concept thing)
         string[] items = shoppingCart.Keys.ToArray();
         int[] qtys = shoppingCart.Values.ToArray();
         decimal totalPrice = 0;
@@ -606,7 +644,7 @@ public partial class Form1 : Form {
 
             labelCheckoutItems.Text += items[i] + "\n";
             labelCheckoutQtys.Text += qtys[i] + "\n";
-            multipliedPrice = stockSystem.Items[items[i]].price;
+            multipliedPrice = stockSystem.Items[items[i]].Price;
             labelCheckoutTotalPrice.Text += multipliedPrice.ToString() + "\n";
             totalPrice += multipliedPrice;
         }
@@ -614,6 +652,7 @@ public partial class Form1 : Form {
         return totalPrice;
     }
     private void buttonCheckoutAdd_Click(object sender, EventArgs e) {
+        //* vaidates and add a qty of a specified kind of item to the shopping cart
         string inputItem = textboxCheckoutItem.Text.Trim().ToUpper();
         string inputQty = textboxCheckoutQty.Text.Trim().ToUpper();
         int intQty;
@@ -632,6 +671,7 @@ public partial class Form1 : Form {
     }
 
     private void buttonCheckoutRemove_Click(object sender, EventArgs e) {
+        //* vaidates and remove a qty of a specified kind of item to the shopping cart
         string inputItem = textboxCheckoutItem.Text.Trim().ToUpper();
         string inputQty = textboxCheckoutQty.Text.Trim().ToUpper();
         int intQty;
@@ -665,8 +705,9 @@ public partial class Form1 : Form {
         MessageBox.Show("purchase successful", "successful action");
     }
     private bool checkStock(Dictionary<string, int> shoppingCart) {
+        //* validates that starage has enough stock to carry out the current order
         foreach (KeyValuePair<string, int> item in shoppingCart) {
-            if (stockSystem.Items[item.Key].stock < item.Value) {
+            if (stockSystem.Items[item.Key].Stock < item.Value) {
                 MessageBox.Show("atleast one type of item has a higher qty that stock!", "ERROR");
                 return false;
             }
@@ -674,6 +715,7 @@ public partial class Form1 : Form {
         return true;
     }
     private void buttonCheckoutCancel_Click(object sender, EventArgs e) {
+        //* removes all infomation on current order - so user won't accidently carry out another order with the wrong data
         shoppingCart.Clear();
         textboxCheckoutEmail.Text = "";
         textboxCheckoutItem.Text = "";

@@ -1,5 +1,8 @@
 ﻿#region dependent classes
 public class SupplyLines { //* dependent on 'Supplier' (struct)
+    #region singleton
+
+    #endregion
     #region initialisers
 
     public SupplyLines() {
@@ -11,6 +14,7 @@ public class SupplyLines { //* dependent on 'Supplier' (struct)
     #endregion
     #region methods
     public bool Add(string name) { //* mutator, validator
+
         if (SupplierDict.ContainsKey(name)) {  return false; }
         //^ validates that supplier doesn't exist
         SupplierDict[name] = new Supplier();

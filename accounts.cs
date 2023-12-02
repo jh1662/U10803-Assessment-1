@@ -59,6 +59,7 @@ public struct Customer { //* dependent on 'Purchase' struct class
     #endregion
     #region methods
     public void addPurchase (Purchase purchase) { //* mutator
+
         Purchases.Add(purchase);
     }
     #endregion

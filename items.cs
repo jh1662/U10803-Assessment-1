@@ -1,9 +1,13 @@
 ﻿using System.Transactions;
 #region dependent classes
-public class StockSystem { //* dependent on 'Item' abstract class (polymorphism)
+public sealed class StockSystem { //* dependent on 'Item' abstract class (polymorphism)
+    #region singleton
+    static private readonly StockSystem singleton = new StockSystem();
+    public static StockSystem obj { get { return singleton; } } //< "obj" short for "object"
+    #endregion
     #region initialiser
     //private Dictionary<string,Item> items = new Dictionary<string,Item>();
-    public StockSystem() {
+    private StockSystem() {
         Items = new Dictionary<string, Item>();
     }
     public Dictionary<string, Item> Items { get; }
@@ -59,6 +63,7 @@ public abstract class Item { //* independent, parent of classes: 'Shoe', 'Clothi
     //public decimal price;
     //public int stock;
     private int stock;
+    //^ No idea why but property won't work without the attribute!!
     public Item(string name, decimal price, int stock) {
         Name = name;
         Price = price;
@@ -72,10 +77,11 @@ public abstract class Item { //* independent, parent of classes: 'Shoe', 'Clothi
     //^ to be accessed by 'Form1.cs'
     #endregion
     #region methods
-    public bool sell(int qty) { //* validator
+    public bool sell(int qty) { //* validator, modifier
         int checkStock = Stock - qty;
 
         if (checkStock < 0) { return false; }
+        stock -= qty;
         return true;
     }
     public void add(int qty) { //* modifier
@@ -88,7 +94,7 @@ public abstract class Item { //* independent, parent of classes: 'Shoe', 'Clothi
     #endregion
 }
 
-public class Shoe : Item { //* independent
+public sealed class Shoe : Item { //* independent
     #region initialisers
     private decimal size;
     private string type;
@@ -105,7 +111,7 @@ public class Shoe : Item { //* independent
     }
     #endregion
 }
-public class Clothing : Item { //* independent
+public sealed class Clothing : Item { //* independent
     #region intialisers
     private int size;
     private string type;
@@ -140,7 +146,7 @@ public abstract class Accessory : Item { //* independent
 //------------------------------------------------------------------------------------------------------------------------------
 
 #region children of the 'Accessory' class
-public class Bag : Accessory { //* independent, parent of classes: 'Watch', 'Bag', and 'Drink'
+public sealed class Bag : Accessory { //* independent, parent of classes: 'Watch', 'Bag', and 'Drink'
     #region initialisers
     private decimal capacity;
     public Bag(string name, decimal price, int stock, decimal capacity) 
@@ -155,7 +161,7 @@ public class Bag : Accessory { //* independent, parent of classes: 'Watch', 'Bag
     }
     #endregion
 }
-public class Watch : Accessory { //* independent
+public sealed class Watch : Accessory { //* independent
     #region initialisers
     private bool hasGPS;
     private bool hasRate;
@@ -172,7 +178,7 @@ public class Watch : Accessory { //* independent
     }
     #endregion
 }
-public class Drink : Accessory { //* independent
+public sealed class Drink : Accessory { //* independent
     #region initialisers    
     private decimal capacity;
     private string type;

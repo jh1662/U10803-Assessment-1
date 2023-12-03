@@ -1,10 +1,14 @@
 ﻿using System.Web;
 using System.Xml.Linq;
 #region dependent classes
-public class AllCustomers { //* dependent on 'Customer' struct class
+public sealed class AllCustomers { //* dependent on 'Customer' struct class
+    #region singleton
+    static private readonly AllCustomers singleton = new AllCustomers();
+    public static AllCustomers obj { get { return singleton; } }
+    #endregion
     #region intialiser
 
-    public AllCustomers() {
+    private AllCustomers() {
         Accounts = new Dictionary<string, Customer>();
     }
     public Dictionary<string, Customer> Accounts { get; }

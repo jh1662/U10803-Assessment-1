@@ -1,11 +1,12 @@
 ﻿#region dependent classes
-public class SupplyLines { //* dependent on 'Supplier' (struct)
+public sealed class SupplyLines { //* dependent on 'Supplier' (struct)
+    //^ I think using singleton pattern class is better to use over a static class.
     #region singleton
-
+    static private readonly SupplyLines singleton = new SupplyLines();
+    public static SupplyLines obj { get { return singleton; } } //< "obj" short for "object"
     #endregion
     #region initialisers
-
-    public SupplyLines() {
+    private SupplyLines() {
         SupplierDict = new Dictionary<string, Supplier>();
     }
 

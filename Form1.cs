@@ -8,9 +8,9 @@ namespace U10803___Assessment_1;
 public partial class Form1 : Form {
     #region initialisers
     //: instansiatating own
-    StockSystem stockSystem = new StockSystem();
-    SupplyLines supplyLines = new SupplyLines();
-    AllCustomers allCustomers = new AllCustomers();
+    //SupplyLines SupplyLines = new SupplyLines();
+    //StockSystem stockSystem = new StockSystem();
+    //AllCustomers allCustomers = new AllCustomers();
 
     int numberOfDetails;
 
@@ -122,7 +122,7 @@ public partial class Form1 : Form {
         */
 
         //: The filtering part
-        foreach (Item item in stockSystem.Items.Values) {
+        foreach (Item item in StockSystem.obj.Items.Values) {
             switch (itemType) {
                 case ItemType.Shoe:
                     if (item is Shoe) { itemList.Add(item); }
@@ -151,7 +151,7 @@ public partial class Form1 : Form {
         //: displaying info to user
         for (int i = 0; i < itemArr.Length; i++) {
             labelStorageListName.Text += itemArr[i].Name + "\n\n";
-            labelStorageListPrice.Text += itemArr[i].Price + "\n\n";
+            labelStorageListPrice.Text += "\u00A3" + itemArr[i].Price + "\n\n";
             labelStorageListStock.Text += itemArr[i].Stock + "\n\n";
             labelStorageListUnique.Text += itemArr[i].giveUniqueDetails() + "\n\n";
             /*
@@ -244,6 +244,7 @@ public partial class Form1 : Form {
         name = saperatedInputs[0];
         groupVerification.Add(int.TryParse(saperatedInputs[1], out stock));
         groupVerification.Add(decimal.TryParse(saperatedInputs[2], out price));
+        if (!(decimal.Round(price, 2) == price)) { groupVerification.Add(false); }
         //: different ways to add item - depending on the type of item
         switch (itemType) {
             case ItemType.Shoe:
@@ -254,7 +255,7 @@ public partial class Form1 : Form {
                     break;
                 }
                 Shoe shoeObj = new Shoe(name, price, stock, shoeSize, shoeType);
-                if (!stockSystem.add(shoeObj)) {
+                if (!StockSystem.obj.add(shoeObj)) {
                     MessageBox.Show("Item (by name) aleady exists", "ERROR");
                     break;
                 }
@@ -269,7 +270,7 @@ public partial class Form1 : Form {
                     break;
                 }
                 Clothing clothingObj = new Clothing(name, price, stock, clothingSize, clothingType, style);
-                if (!stockSystem.add(clothingObj)) {
+                if (!StockSystem.obj.add(clothingObj)) {
                     MessageBox.Show("Item (by name) aleady exists", "ERROR");
                     break;
                 }
@@ -319,7 +320,7 @@ public partial class Form1 : Form {
                 }
 
                 Watch watch = new Watch(name, price, stock, infoHasGPS, infoHasRate);
-                if (!stockSystem.add(watch)) {
+                if (!StockSystem.obj.add(watch)) {
                     MessageBox.Show("accessory (by name) already exists", "ERROR");
                     return false;
                 }
@@ -342,7 +343,7 @@ public partial class Form1 : Form {
                     return false;
                 }
                 Bag bag = new Bag(name, price, stock, infoCapacityBag);
-                if (!stockSystem.add(bag)) {
+                if (!StockSystem.obj.add(bag)) {
                     MessageBox.Show("accessory (by name) already exists", "ERROR");
                     return false;
                 }
@@ -367,7 +368,7 @@ public partial class Form1 : Form {
                 }
                 infoType = extraInfo[1];
                 Drink drink = new Drink(name, price, stock, infoCapacityDrink, infoType);
-                if (!stockSystem.add(drink)) {
+                if (!StockSystem.obj.add(drink)) {
                     MessageBox.Show("accessory (by name) already exists", "ERROR");
                     return false;
                 }
@@ -405,19 +406,19 @@ public partial class Form1 : Form {
     private void supplierViewRefresh() {
 
         //* allows user to see all suppliers, and thier stock, accurently (so they don't add the same supplier and stock twice)
-        if (supplyLines.SupplierDict.Count == 0) { return; }
+        if (SupplyLines.obj.SupplierDict.Count == 0) { return; }
 
         labelSupplierViewName.Text = string.Empty;
         labelSupplierViewStock.Text = string.Empty;
-        string[] supplierNames = supplyLines.SupplierDict.Keys.ToArray();
+        string[] supplierNames = SupplyLines.obj.SupplierDict.Keys.ToArray();
         string[] supplierStock = new string[supplierNames.Length];
 
         for (int i = 0; i < supplierNames.Length; i++) {
-            if (supplyLines.SupplierDict[supplierNames[i]].StockDict.Count == 0) {
+            if (SupplyLines.obj.SupplierDict[supplierNames[i]].StockDict.Count == 0) {
                 supplierStock[i] = "None!";
                 continue;
             }
-            foreach (KeyValuePair<string, int> pair in supplyLines.SupplierDict[supplierNames[i]].StockDict) {
+            foreach (KeyValuePair<string, int> pair in SupplyLines.obj.SupplierDict[supplierNames[i]].StockDict) {
                 supplierStock[i] += $"{pair.Key} - {pair.Value}, ";
             }
         }
@@ -434,11 +435,11 @@ public partial class Form1 : Form {
             MessageBox.Show("can't leave any textbox blank!", "error");
             return false;
         }
-        if (!supplyLines.SupplierDict.ContainsKey(supplier)) {
+        if (!SupplyLines.obj.SupplierDict.ContainsKey(supplier)) {
             MessageBox.Show("supplier doesn't exist!", "error");
             return false;
         }
-        if (!stockSystem.Items.ContainsKey(item)) {
+        if (!StockSystem.obj.Items.ContainsKey(item)) {
             MessageBox.Show("item doesn't exist!", "error");
             return false;
         }
@@ -459,7 +460,7 @@ public partial class Form1 : Form {
             MessageBox.Show("can't leave the name blank!", "error");
             return;
         }
-        if (supplyLines.Add(input) == false) {
+        if (SupplyLines.obj.Add(input) == false) {
             MessageBox.Show("supplier name already exists!", "error");
             return;
         }
@@ -475,13 +476,13 @@ public partial class Form1 : Form {
         if (!verifyInputsSupplier(inputSupplier, inputItem, inputQty)) { return; }
         qty = int.Parse(inputQty);
 
-        if (!supplyLines.SupplierDict[inputSupplier].restock(inputItem, qty)) {
+        if (!SupplyLines.obj.SupplierDict[inputSupplier].restock(inputItem, qty)) {
             MessageBox.Show("supplier currently doesn't have that order/quantity", "error");
             return;
         }
 
         //stockSystem.Items[inputItem].Stock += qty;
-        stockSystem.stock(inputItem, qty);
+        StockSystem.obj.stock(inputItem, qty);
         supplierViewRefresh();
         UIStorageUpdate();
         MessageBox.Show("restock successful", "info");
@@ -496,7 +497,7 @@ public partial class Form1 : Form {
         if (!verifyInputsSupplier(inputSupplier, inputItem, inputQty)) { return; }
         qty = int.Parse(inputQty);
 
-        supplyLines.SupplierDict[inputSupplier].order(inputItem, qty);
+        SupplyLines.obj.SupplierDict[inputSupplier].order(inputItem, qty);
         supplierViewRefresh();
         MessageBox.Show("order successful", "info");
     }
@@ -552,19 +553,19 @@ public partial class Form1 : Form {
             MessageBox.Show("can't leave name empty", "error");
             return;
         }
-        if (allCustomers.findEmail(email)) {
+        if (AllCustomers.obj.findEmail(email)) {
             MessageBox.Show("customer (by email) already exists", "error");
             return;
         }
-        allCustomers.addCustomer(email, name);
+        AllCustomers.obj.addCustomer(email, name);
         MessageBox.Show("customer (with email) added successfully", "successful action");
         refreshRecents();
     }
 
     private void refreshRecents() {
         //* refresh the display of all customers - to prevent user attempting to add the same customer again
-        string[] emails = allCustomers.viewAllEmails();
-        string[] names = allCustomers.viewAllNames();
+        string[] emails = AllCustomers.obj.viewAllEmails();
+        string[] names = AllCustomers.obj.viewAllNames();
 
         labelCustomerAddRecentEmail.Text = "";
         labelCustomerAddRecentName.Text = "";
@@ -582,17 +583,17 @@ public partial class Form1 : Form {
         labelCustomerViewPurchaseItems.Text = "";
         labelCustomerViewPurchaseCost.Text = "";
 
-        if (!allCustomers.findEmail(email)) {
+        if (!AllCustomers.obj.findEmail(email)) {
             MessageBox.Show("customer (by email) does not exist", "error");
             return;
         }
 
-        purchases = allCustomers.viewCustomer(email).Purchases.ToArray();
+        purchases = AllCustomers.obj.viewCustomer(email).Purchases.ToArray();
         if (purchases.Length == 0) { return; }
         foreach (Purchase purchase in purchases) {
             labelCustomerViewPurchaseDate.Text += (purchase.SaleDate + "\n");
             labelCustomerViewPurchaseItems.Text += purchasedItemsToString(purchase.Items);
-            labelCustomerViewPurchaseCost.Text += (purchase.Price + "\n");
+            labelCustomerViewPurchaseCost.Text += ("\u00A3" + purchase.Price + "\n");
         }
     }
 
@@ -618,7 +619,7 @@ public partial class Form1 : Form {
     private bool inspectEmail() {
         //* check if a customer (by inputted email) exists
         string email = textboxCheckoutEmail.Text.Trim().ToUpper();
-        if (allCustomers.findEmail(email)) {
+        if (AllCustomers.obj.findEmail(email)) {
             MessageBox.Show("customer (by email) is confirmed to exist", "check successful");
             return true;
         }
@@ -644,11 +645,11 @@ public partial class Form1 : Form {
 
             labelCheckoutItems.Text += items[i] + "\n";
             labelCheckoutQtys.Text += qtys[i] + "\n";
-            multipliedPrice = stockSystem.Items[items[i]].Price;
-            labelCheckoutTotalPrice.Text += multipliedPrice.ToString() + "\n";
+            multipliedPrice = StockSystem.obj.Items[items[i]].Price * qtys[i];
+            labelCheckoutPrices.Text += "\u00A3" + multipliedPrice.ToString() + "\n";
             totalPrice += multipliedPrice;
         }
-        labelCheckoutTotalPrice.Text = totalPrice.ToString();
+        labelCheckoutTotalPrice.Text = "\u00A3" + totalPrice.ToString();
         return totalPrice;
     }
     private void buttonCheckoutAdd_Click(object sender, EventArgs e) {
@@ -657,7 +658,7 @@ public partial class Form1 : Form {
         string inputQty = textboxCheckoutQty.Text.Trim().ToUpper();
         int intQty;
 
-        if (!stockSystem.check(inputItem) || !int.TryParse(inputQty, out intQty)) {
+        if (!StockSystem.obj.check(inputItem) || !int.TryParse(inputQty, out intQty)) {
             MessageBox.Show("infomation inputted incorrectly", "ERROR");
             return;
         }
@@ -676,7 +677,7 @@ public partial class Form1 : Form {
         string inputQty = textboxCheckoutQty.Text.Trim().ToUpper();
         int intQty;
 
-        if (!stockSystem.check(inputItem) || !int.TryParse(inputQty, out intQty)) {
+        if (!StockSystem.obj.check(inputItem) || !int.TryParse(inputQty, out intQty)) {
             MessageBox.Show("infomation inputted incorrectly", "ERROR");
             return;
         }
@@ -693,6 +694,7 @@ public partial class Form1 : Form {
     }
 
     private void buttonCheckoutSubmit_Click(object sender, EventArgs e) {
+        //* final validation and executing shopping cart order
         decimal totalPrice = refresh();
         Purchase purchase;
 
@@ -700,15 +702,19 @@ public partial class Form1 : Form {
         if (!checkStock(shoppingCart)) { return; }
 
         purchase = new Purchase(DateTime.Now, totalPrice, shoppingCart);
-        allCustomers.addPurchase(textboxCheckoutEmail.Text.Trim().ToUpper(), purchase);
-        /// remove stock
+        AllCustomers.obj.addPurchase(textboxCheckoutEmail.Text.Trim().ToUpper(), purchase);
+        //: remove stock
+        foreach (KeyValuePair<string, int> item in shoppingCart) {
+            StockSystem.obj.sell(item.Key, item.Value);
+        }
+
         MessageBox.Show("purchase successful", "successful action");
     }
     private bool checkStock(Dictionary<string, int> shoppingCart) {
         //* validates that starage has enough stock to carry out the current order
         foreach (KeyValuePair<string, int> item in shoppingCart) {
-            if (stockSystem.Items[item.Key].Stock < item.Value) {
-                MessageBox.Show("atleast one type of item has a higher qty that stock!", "ERROR");
+            if (StockSystem.obj.Items[item.Key].Stock < item.Value) {
+                MessageBox.Show("atleast one type of item has a higher qty than stock!", "ERROR");
                 return false;
             }
         }

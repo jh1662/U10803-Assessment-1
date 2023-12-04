@@ -1,4 +1,8 @@
 ﻿using System.Transactions;
+/*
+ * "The shop stocks a number of items for sale – sports clothing, running shoes and otheraccessories (Bags, Nutrition and Watches)"
+ * DOES NOT SAY ANYTHING ABOUT ADDING ANY ACCESSORY AS THE USER WILL TO >:(
+*/
 #region dependent classes
 public sealed class StockSystem { //* dependent on 'Item' abstract class (polymorphism)
     #region singleton

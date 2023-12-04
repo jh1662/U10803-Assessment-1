@@ -117,4 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>This is a manual. The program is made to be understandable, but if one still does not understand then this manual will help you!
+
+Checkout - fill up shopping cart and carry out a customer's order
+
+Customer - create new customers and see thier purchase history
+
+Suppliers - order from, restock and add suppliers
+
+Storage - View all kinds of items (filtered by item type)
+
+Add new items - Add a new kind of item</value>
+  </data>
 </root>

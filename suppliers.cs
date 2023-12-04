@@ -1,5 +1,7 @@
 ﻿#region dependent classes
-public sealed class SupplyLines { //* dependent on 'Supplier' (struct)
+using U10803___Assessment_1;
+
+public sealed class SupplyLines : DictAPI<Supplier> { //* dependent on 'Supplier' (struct)
     //^ I think using singleton pattern class is better to use over a static class.
     #region singleton
     static private readonly SupplyLines singleton = new SupplyLines();
@@ -7,18 +9,18 @@ public sealed class SupplyLines { //* dependent on 'Supplier' (struct)
     #endregion
     #region initialisers
     private SupplyLines() {
-        SupplierDict = new Dictionary<string, Supplier>();
+        Accounts = new Dictionary<string, Supplier>();
     }
 
-    public Dictionary<string, Supplier> SupplierDict { get; }
+    public Dictionary<string, Supplier> Accounts { get; }
     //^ to be accessed by 'Form1.cs'
     #endregion
     #region methods
-    public bool Add(string name) { //* mutator, validator
+    public bool add (string name) { //* mutator, validator
 
-        if (SupplierDict.ContainsKey(name)) {  return false; }
+        if (Accounts.ContainsKey(name)) {  return false; }
         //^ validates that supplier doesn't exist
-        SupplierDict[name] = new Supplier();
+        Accounts[name] = new Supplier();
         //^ creates and store new supplier
         return true;
         //^ method call is successful

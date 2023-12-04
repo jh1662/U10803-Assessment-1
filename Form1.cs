@@ -1,22 +1,26 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Linq;
 
 namespace U10803___Assessment_1;
 
-public partial class Form1 : Form {
+public partial class Form1 : Form, IComparer<Item> {
     #region initialisers
     //: instansiatating own
     //SupplyLines SupplyLines = new SupplyLines();
     //StockSystem stockSystem = new StockSystem();
     //AllCustomers allCustomers = new AllCustomers();
 
-    int numberOfDetails;
+    private enum ItemType { Shoe, Clothing, Accessory }
+    public enum CompareItem { Price, Stock, Name }
+    private enum AccessoryType { Watch, Bag, Drink }
 
-    public enum ItemType { Shoe, Clothing, Accessory }
+    private int numberOfDetails;
+    private CompareItem attribute;
 
-    public Dictionary<string, int> shoppingCart = new Dictionary<string, int>();
+    private Dictionary<string, int> shoppingCart = new Dictionary<string, int>();
     public Form1() {
         InitializeComponent();
     }
@@ -43,37 +47,39 @@ public partial class Form1 : Form {
     #endregion
 
     #region tab - Storage
-    public enum Compare { Price, Stock, Name }
-    public bool isBigger(Item item1, Item item2, Compare compare) {
+    public int Compare(Item item1, Item item2) {
 
+        CompareItem compare = attribute;
         //: different ways of comparison - dependent on data type
         switch (compare) {
-            case Compare.Price:
-                if (item1.Price > item2.Price) { return true; }
-                return false;
-            case Compare.Stock:
-                if (item1.Stock > item2.Stock) { return true; }
-                return false;
+            case CompareItem.Price:
+                if (item1.Price > item2.Price) { return 1; }
+                return 0;
+            case CompareItem.Stock:
+                if (item1.Stock > item2.Stock) { return 1; }
+                return 0;
             default: //< if 'compare' = 'Compare.Name' 
                 int length;
                 if (item1.Name.Length < item2.Name.Length) { length = item1.Name.Length; }
                 else { length = item2.Name.Length; }
                 for (int i = 0; i < item1.Name.Length; i++) {
-                    if (item1.Name[i] > item2.Name[i]) { return true; }
-                    if (item1.Name[i] < item2.Name[i]) { return false; }
+                    if (item1.Name[i] > item2.Name[i]) { return 1; }
+                    if (item1.Name[i] < item2.Name[i]) { return 0; }
                 }
-                return false;
+                return 0;
         }
     }
-    public Item[] bubbleSort(Item[] itemArr, Compare compare) {
+    private Item[] bubbleSort(Item[] itemArr, CompareItem compareAttribute) {
         int len = itemArr.Length;
         Item temp;
         bool inactiveLoop;
 
+        attribute = compareAttribute;
         for (int index1 = 0; index1 < len - 1; index1++) {
             inactiveLoop = true;
             for (int index2 = 0; index2 < len - 1; index2++) {
-                if (isBigger(itemArr[index2], itemArr[index2 + 1], compare)) {
+
+                if (Compare(itemArr[index2], itemArr[index2 + 1]) == 1) {
                     inactiveLoop = false;
                     temp = itemArr[index2];
                     itemArr[index2] = itemArr[index2 + 1];
@@ -99,7 +105,7 @@ public partial class Form1 : Form {
         //int type = comboboxStorageType.SelectedIndex;
         ItemType itemType = (ItemType)comboboxStorageType.SelectedIndex;
         //int sort = comboboxStorageSort.SelectedIndex;
-        Compare sort = (Compare)comboboxStorageSort.SelectedIndex;
+        CompareItem sort = (CompareItem)comboboxStorageSort.SelectedIndex;
         List<Item> itemList = new List<Item>();
         Item[] itemArr;
         //Type classType;
@@ -183,9 +189,7 @@ public partial class Form1 : Form {
     #endregion
 
     #region tab - Add
-    public enum AccessoryType { Watch, Bag, Drink }
-
-    public bool tryBool(string input, out bool result) {
+    private bool tryBool(string input, out bool result) {
         //* convert user's input to a boolean
         result = false;
 
@@ -199,7 +203,7 @@ public partial class Form1 : Form {
                 return false;
         }
     }
-    public string[] verifyDetailsInput(string input, int count) {
+    private string[] verifyDetailsInput(string input, int count) {
         //* converts user's singular input to a string array
         string[] verified;
         int counts = 0;
@@ -292,6 +296,7 @@ public partial class Form1 : Form {
                 MessageBox.Show("Item creation successful", "successful action");
                 break;
         }
+        UIStorageUpdate();
     }
     private bool addAccessory(string type, string name, decimal price, int stock) {
         //* determine what type accessory the user wants to add and does it
@@ -406,19 +411,19 @@ public partial class Form1 : Form {
     private void supplierViewRefresh() {
 
         //* allows user to see all suppliers, and thier stock, accurently (so they don't add the same supplier and stock twice)
-        if (SupplyLines.obj.SupplierDict.Count == 0) { return; }
+        if (SupplyLines.obj.Accounts.Count == 0) { return; }
 
         labelSupplierViewName.Text = string.Empty;
         labelSupplierViewStock.Text = string.Empty;
-        string[] supplierNames = SupplyLines.obj.SupplierDict.Keys.ToArray();
+        string[] supplierNames = SupplyLines.obj.Accounts.Keys.ToArray();
         string[] supplierStock = new string[supplierNames.Length];
 
         for (int i = 0; i < supplierNames.Length; i++) {
-            if (SupplyLines.obj.SupplierDict[supplierNames[i]].StockDict.Count == 0) {
+            if (SupplyLines.obj.Accounts[supplierNames[i]].StockDict.Count == 0) {
                 supplierStock[i] = "None!";
                 continue;
             }
-            foreach (KeyValuePair<string, int> pair in SupplyLines.obj.SupplierDict[supplierNames[i]].StockDict) {
+            foreach (KeyValuePair<string, int> pair in SupplyLines.obj.Accounts[supplierNames[i]].StockDict) {
                 supplierStock[i] += $"{pair.Key} - {pair.Value}, ";
             }
         }
@@ -435,7 +440,7 @@ public partial class Form1 : Form {
             MessageBox.Show("can't leave any textbox blank!", "error");
             return false;
         }
-        if (!SupplyLines.obj.SupplierDict.ContainsKey(supplier)) {
+        if (!SupplyLines.obj.Accounts.ContainsKey(supplier)) {
             MessageBox.Show("supplier doesn't exist!", "error");
             return false;
         }
@@ -460,7 +465,7 @@ public partial class Form1 : Form {
             MessageBox.Show("can't leave the name blank!", "error");
             return;
         }
-        if (SupplyLines.obj.Add(input) == false) {
+        if (SupplyLines.obj.add(input) == false) {
             MessageBox.Show("supplier name already exists!", "error");
             return;
         }
@@ -476,7 +481,7 @@ public partial class Form1 : Form {
         if (!verifyInputsSupplier(inputSupplier, inputItem, inputQty)) { return; }
         qty = int.Parse(inputQty);
 
-        if (!SupplyLines.obj.SupplierDict[inputSupplier].restock(inputItem, qty)) {
+        if (!SupplyLines.obj.Accounts[inputSupplier].restock(inputItem, qty)) {
             MessageBox.Show("supplier currently doesn't have that order/quantity", "error");
             return;
         }
@@ -497,7 +502,7 @@ public partial class Form1 : Form {
         if (!verifyInputsSupplier(inputSupplier, inputItem, inputQty)) { return; }
         qty = int.Parse(inputQty);
 
-        SupplyLines.obj.SupplierDict[inputSupplier].order(inputItem, qty);
+        SupplyLines.obj.Accounts[inputSupplier].order(inputItem, qty);
         supplierViewRefresh();
         MessageBox.Show("order successful", "info");
     }
@@ -557,7 +562,7 @@ public partial class Form1 : Form {
             MessageBox.Show("customer (by email) already exists", "error");
             return;
         }
-        AllCustomers.obj.addCustomer(email, name);
+        AllCustomers.obj.add(email, name);
         MessageBox.Show("customer (with email) added successfully", "successful action");
         refreshRecents();
     }

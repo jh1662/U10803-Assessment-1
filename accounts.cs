@@ -1,7 +1,8 @@
 ﻿using System.Web;
 using System.Xml.Linq;
+using U10803___Assessment_1;
 #region dependent classes
-public sealed class AllCustomers { //* dependent on 'Customer' struct class
+public sealed class AllCustomers : DictAPI<Customer> { //* dependent on 'Customer' struct class
     #region singleton
     static private readonly AllCustomers singleton = new AllCustomers();
     public static AllCustomers obj { get { return singleton; } }
@@ -19,7 +20,7 @@ public sealed class AllCustomers { //* dependent on 'Customer' struct class
         if (Accounts.ContainsKey(email)) { return true; }; 
         return false;
     }
-    public void addCustomer(string email, string name) { //* mutator
+    public void add(string email, string name) { //* mutator
 
         Accounts.Add(email, new Customer(name, email));
     }
@@ -35,6 +36,7 @@ public sealed class AllCustomers { //* dependent on 'Customer' struct class
         string[] names = new string[Accounts.Count];
         Customer[] customersObjs = Accounts.Values.ToArray();
         //^ get customers to see thier names
+
 
         for (int i = 0; i < names.Length; i++) { names[i] = customersObjs[i].Name; }
         //^ stores all wanted strings into an array
